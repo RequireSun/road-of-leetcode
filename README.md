@@ -12,4 +12,6 @@
 
 + [0210. 课程表 2](0210.course-schedule-ii)
 
++ [0421. 在给定数组中求最大的两数异或值](0421.maximum-xor-of-two-numbers-in-an-array)
+
 + [0498. 对角线](0498.diagonal-traverse)

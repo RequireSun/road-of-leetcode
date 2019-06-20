@@ -76,4 +76,14 @@
 
 (因为每一步的异或操作都是在满足两个数字都在 set 中才会更新最大值的前提下进行的, 所以也不需要担心出现位蹿动的问题)
 
+### 思路来源
+
+javascript 版本:
+
+[https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/discuss/289178/Javascript-O(n)-solution-using-bit-manipulation-and-HashMap-(beat-100)](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/discuss/289178/Javascript-O(n)-solution-using-bit-manipulation-and-HashMap-(beat-100))
+
+java 版本 (源版本):
+
+[https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/discuss/91049/Java-O(n)-solution-using-bit-manipulation-and-HashMap](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/discuss/91049/Java-O(n)-solution-using-bit-manipulation-and-HashMap)
+
 ![成绩](.assets/step-by-step.png)

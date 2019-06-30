@@ -103,3 +103,13 @@ __A:__ 分为以下几步:
 但在求 fib 数组时, 因为 10^9 < 2^30, 所以他们都是直接求了 30 长度的 fib 数组.
 
 在求 fib 数组时直接砍一刀, 根据数字长度求 fib 数组, 可以有效降低计算 fib 时的时间消耗.
+
+## 思路来源
+
+减法版:
+
+[https://leetcode.com/problems/non-negative-integers-without-consecutive-ones/discuss/103749/Java-Solution-DP](https://leetcode.com/problems/non-negative-integers-without-consecutive-ones/discuss/103749/Java-Solution-DP)
+
+加法版:
+
+[https://leetcode.com/problems/non-negative-integers-without-consecutive-ones/discuss/103754/C%2B%2B-Non-DP-O(32)-Fibonacci-solution](https://leetcode.com/problems/non-negative-integers-without-consecutive-ones/discuss/103754/C%2B%2B-Non-DP-O(32)-Fibonacci-solution)

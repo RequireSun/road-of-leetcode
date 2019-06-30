@@ -86,4 +86,8 @@ java 版本 (源版本):
 
 [https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/discuss/91049/Java-O(n)-solution-using-bit-manipulation-and-HashMap](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/discuss/91049/Java-O(n)-solution-using-bit-manipulation-and-HashMap)
 
+中文解释:
+
+[https://blog.csdn.net/woshinannan741/article/details/51985368](https://blog.csdn.net/woshinannan741/article/details/51985368)
+
 ![成绩](.assets/step-by-step.png)

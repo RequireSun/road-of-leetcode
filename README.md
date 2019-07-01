@@ -24,4 +24,6 @@
 
 + [0611. 有效三角形的个数](0611.valid-triangle-number)
 
++ [0641. 设计循环双端队列](0641.design-circular-deque)
+
 + [0670. 最大交换](0670.maximum-swap)

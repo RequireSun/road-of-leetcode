@@ -21,3 +21,5 @@
 + [0498. 对角线](0498.diagonal-traverse)
 
 + [0600. 不含连续 1 的非负整数](0600.non-negative-integers-without-consecutive-ones)
+
++ [0670. 最大交换](0670.maximum-swap)

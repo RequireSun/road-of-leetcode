@@ -18,6 +18,8 @@
 
 + [0274. H 指数](0274.h-index)
 
++ [0275. H 指数 2](0275.h-index-ii)
+
 + [0343. 整数拆分](0343.integer-break)
 
 + [0350. 两个数组的交集 2](0350.intersection-of-two-arrays-ii)

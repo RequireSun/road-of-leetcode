@@ -18,6 +18,8 @@
 
 + [0343. 整数拆分](0343.integer-break)
 
++ [0383. 赎金信](0383.ransom-note)
+
 + [0421. 在给定数组中求最大的两数异或值](0421.maximum-xor-of-two-numbers-in-an-array)
 
 + [0435. 无重叠区间](0435.non-overlapping-intervals)

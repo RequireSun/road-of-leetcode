@@ -18,6 +18,8 @@
 
 + [0343. 整数拆分](0343.integer-break)
 
++ [0374. 猜数字大小](0374.guess-number-higher-or-lower)
+
 + [0383. 赎金信](0383.ransom-note)
 
 + [0421. 在给定数组中求最大的两数异或值](0421.maximum-xor-of-two-numbers-in-an-array)

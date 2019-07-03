@@ -16,6 +16,8 @@
 
 + [0260. 单个数字 3](0260.single-number-iii)
 
++ [0274. H 指数](0274.h-index)
+
 + [0343. 整数拆分](0343.integer-break)
 
 + [0350. 两个数组的交集 2](0350.intersection-of-two-arrays-ii)

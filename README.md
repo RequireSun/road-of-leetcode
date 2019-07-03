@@ -18,6 +18,8 @@
 
 + [0343. 整数拆分](0343.integer-break)
 
++ [0372. 超级次方](0372.super-pow)
+
 + [0374. 猜数字大小](0374.guess-number-higher-or-lower)
 
 + [0383. 赎金信](0383.ransom-note)

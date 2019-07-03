@@ -18,6 +18,8 @@
 
 + [0343. 整数拆分](0343.integer-break)
 
++ [0350. 两个数组的交集 2](0350.intersection-of-two-arrays-ii)
+
 + [0371. 两数之和](0371.sum-of-two-integers)
 
 + [0372. 超级次方](0372.super-pow)

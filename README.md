@@ -16,6 +16,8 @@
 
 + [0260. 单个数字 3](0260.single-number-iii)
 
++ [0343. 整数拆分](0343.integer-break)
+
 + [0421. 在给定数组中求最大的两数异或值](0421.maximum-xor-of-two-numbers-in-an-array)
 
 + [0435. 无重叠区间](0435.non-overlapping-intervals)

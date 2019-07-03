@@ -18,6 +18,8 @@
 
 + [0343. 整数拆分](0343.integer-break)
 
++ [0371. 两数之和](0371.sum-of-two-integers)
+
 + [0372. 超级次方](0372.super-pow)
 
 + [0374. 猜数字大小](0374.guess-number-higher-or-lower)

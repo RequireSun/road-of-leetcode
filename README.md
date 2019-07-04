@@ -10,6 +10,8 @@
 
 + [0015. 3 数字之和](0015.3-sum)
 
++ [0167. 两数之和 2 - 输入有序数组](0167.two-sum-ii-input-array-is-sorted)
+
 + [0210. 课程表 2](0210.course-schedule-ii)
 
 + [0227. 基本计算器](0227.basic-calculator-ii)

@@ -14,6 +14,10 @@
 
 原答案是 java 的, 可能这个解法在 java 下效率比较高吧.
 
+[https://blog.csdn.net/woshinannan741/article/details/51985368](https://blog.csdn.net/woshinannan741/article/details/51985368)
+
+CSDN 这个说的是一样的思路.
+
 ### 优化点
 
 本解法写完后只能打败 20% 的人, 可见解法效率极其低下.

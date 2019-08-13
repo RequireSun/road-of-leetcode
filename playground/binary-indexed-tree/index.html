@@ -52,6 +52,8 @@
                         // 加上对应节点的值
                         this._prefix[i] += this._prefix[indexLast];
                         // 去掉最后一个 1
+                        // x & -x 可以求出数字二进制中最后一个 1 的位置
+                        // 详见: ../../TIPS.md
                         indexLast = indexLast - (indexLast & -indexLast);
                     }
                 }

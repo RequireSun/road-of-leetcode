@@ -12,27 +12,30 @@
 </body>
 
 <script>
+    /**
+     * 没有做越位校验, 不要瞎传数字进去, 崩了概不负责
+     */
     class BinaryIndexedTree {
         _array = [];
         /**
          * index 对应的二进制字符串中 1 的数量，加快计算速度
          * @type {Array}
          */
-        _count1 = [];
+        _count1 = [0];
 
         _prefix = [0];
 
         constructor(array) {
             this._array = [undefined, ...array];
-            this._init();
+            this._init(1);
         }
 
-        _init() {
-            for (let i = 0, l = this._array.length; i < l; ++i) {
+        _init(start) {
+            for (let i = start, l = this._array.length; i < l; ++i) {
                 this._count1[i] = BinaryIndexedTree.countI(i.toString(2));
             }
 
-            for (let i = 1, l = this._array.length; i < l; ++i) {
+            for (let i = start, l = this._array.length; i < l; ++i) {
                 if (this._count1[i] === this._count1[i - 1]) {
                     // 如果下一位跟前一位 1 一样, 同级子节点就是累加的
                     this._prefix[i] = this._prefix[i - 1] + this._array[i];
@@ -58,6 +61,13 @@
                     }
                 }
             }
+        }
+
+        push(...args) {
+            const oldLength = this._array.length;
+            this._array.push(...args);
+
+            this._init(oldLength);
         }
 
         /**
@@ -95,50 +105,17 @@
         }
     }
 
-    const binaryIndexedTree = new BinaryIndexedTree([1, 7, 3, 0, 5, 8, 3, 2, 6, 2, 1, 1, 4, 5]);
+    const origin = [1, 7, 3, 0, 5, 8, 3, 2, 6, 2, 1, 1, 4, 5, 1, 2, 3, 4, 5, 6];
+
+    const binaryIndexedTree = new BinaryIndexedTree(origin.slice(0, 14));
 
     console.log(binaryIndexedTree.getSummary(10));
     console.log(binaryIndexedTree.getScope(6, 10));
 
-    // const arr = [undefined, 1, 7, 3, 0, 5, 8, 3, 2, 6, 2, 1, 1, 4, 5];
-    // const _binary = [];
-    // const _count1 = [];
-    // const tree = [0];
-    //
-    // for (let i = 0, l = arr.length; i < l; ++i) {
-    //     _binary[i] = i.toString(2);
-    //     _count1[i] = countI(_binary[i]);
-    // }
-    //
-    // for (let i = 1, l = arr.length; i < l; ++i) {
-    //     if (_count1[i] === _count1[i - 1]) {
-    //         tree[i] = tree[i - 1] + arr[i];
-    //     } else if (_count1[i] > _count1[i - 1]) {
-    //         tree[i] = arr[i];
-    //     } else if (_count1[i] < _count1[i - 1]) {
-    //         let indexLast = i - 1;
-    //         let binaryLast = _binary[indexLast];
-    //         const countThis = _count1[i];
-    //         tree[i] = arr[i];
-    //
-    //         while (_count1[indexLast] >= countThis) {
-    //             tree[i] += tree[indexLast];
-    //             indexLast = indexLast - (indexLast & -indexLast);
-    //             binaryLast = _binary[indexLast];
-    //         }
-    //     }
-    // }
-    //
-    // console.log(tree);
-    //
-    // function countI(str) {
-    //     let count = 0;
-    //     for (let i = 0, l = str.length; i < l; ++i) {
-    //         if ('1' === str[i]) {
-    //             ++count;
-    //         }
-    //     }
-    //     return count;
-    // }
+    binaryIndexedTree.push(...origin.slice(14));
+
+    console.log(binaryIndexedTree.getSummary(19));
+
+    console.log(origin.slice(0, 19).reduce((prev, cur) => prev + cur, 0));
 </script>
 </html>

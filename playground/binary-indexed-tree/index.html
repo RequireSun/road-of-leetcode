@@ -2,54 +2,150 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Binary indexed tree</title>
+    <title>Binary Indexed Tree</title>
 </head>
 <body>
     <h1>See Chrome Devtools!</h1>
+    二叉索引树 or 树状数组
     <a href="https://zh.wikipedia.org/wiki/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84">Wiki</a>
     <a href="https://blog.csdn.net/Yaokai_AssultMaster/article/details/79492190">CSDN</a>
 </body>
 
 <script>
-    const arr = [undefined, 1, 7, 3, 0, 5, 8, 3, 2, 6, 2, 1, 1, 4, 5];
-    const binary = [];
-    const count1 = [];
-    const tree = [0];
+    class BinaryIndexedTree {
+        _array = [];
+        /**
+         * index 对应的二进制字符串，加快计算速度
+         * @type {Array}
+         */
+        _binary = [];
+        /**
+         * index 对应的二进制字符串中 1 的数量，加快计算速度
+         * @type {Array}
+         */
+        _count1 = [];
 
-    for (let i = 0, l = arr.length; i < l; ++i) {
-        binary[i] = i.toString(2);
-        count1[i] = countI(binary[i]);
-    }
+        _prefix = [0];
 
-    for (let i = 1, l = arr.length; i < l; ++i) {
-        if (count1[i] === count1[i - 1]) {
-            tree[i] = tree[i - 1] + arr[i];
-        } else if (count1[i] > count1[i - 1]) {
-            tree[i] = arr[i];
-        } else if (count1[i] < count1[i - 1]) {
-            let indexLast = i - 1;
-            let binaryLast = binary[indexLast];
-            const countThis = count1[i];
-            tree[i] = arr[i];
+        constructor(array) {
+            this._array = [undefined, ...array];
+            this._init();
+        }
 
-            while (count1[indexLast] >= countThis) {
-                tree[i] += tree[indexLast];
-                indexLast = indexLast - (indexLast & -indexLast);
-                binaryLast = binary[indexLast];
+        _init() {
+            for (let i = 0, l = this._array.length; i < l; ++i) {
+                this._binary[i] = i.toString(2);
+                this._count1[i] = BinaryIndexedTree.countI(this._binary[i]);
             }
+
+            for (let i = 1, l = this._array.length; i < l; ++i) {
+                if (this._count1[i] === this._count1[i - 1]) {
+                    // 如果下一位跟前一位 1 一样, 同级子节点就是累加的
+                    this._prefix[i] = this._prefix[i - 1] + this._array[i];
+                } else if (this._count1[i] > this._count1[i - 1]) {
+                    // 如果下一位 1 多了, 就相当于新开子节点
+                    this._prefix[i] = this._array[i];
+                } else if (this._count1[i] < this._count1[i - 1]) {
+                    // 前一个下标
+                    let indexLast = i - 1;
+                    // 前一个下标的具体二进制
+                    let binaryLast = this._binary[indexLast];
+                    // 当前 1 的个数
+                    const countThis = this._count1[i];
+                    // 先加上自己
+                    this._prefix[i] = this._array[i];
+
+                    // 只要 1 的数量还大于当前值 (也就是说还在子节点中), 就继续加
+                    while (this._count1[indexLast] >= countThis) {
+                        // 加上对应节点的值
+                        this._prefix[i] += this._prefix[indexLast];
+                        // 去掉最后一个 1
+                        indexLast = indexLast - (indexLast & -indexLast);
+                        // 去掉最后一个 1 以后的二进制结果
+                        binaryLast = this._binary[indexLast];
+                    }
+                }
+            }
+        }
+
+        /**
+         * 闭开区间 [start, end)
+         * @param start
+         * @param end
+         */
+        getScope(start, end) {
+
+        }
+
+        /**
+         * 相对于原数组来说, 应该是开的 (index 那一位不计算)
+         * @param index
+         */
+        getSummary(index) {
+            let sum = 0;
+
+            while (index) {
+                sum += this._prefix[index];
+                index = index - (index & -index);
+            }
+
+            return sum;
+        }
+
+        static countI(str) {
+            let count = 0;
+            for (let i = 0, l = str.length; i < l; ++i) {
+                if ('1' === str[i]) {
+                    ++count;
+                }
+            }
+            return count;
         }
     }
 
-    console.log(tree);
+    const binaryIndexedTree = new BinaryIndexedTree([1, 7, 3, 0, 5, 8, 3, 2, 6, 2, 1, 1, 4, 5]);
 
-    function countI(str) {
-        let count = 0;
-        for (let i = 0, l = str.length; i < l; ++i) {
-            if ('1' === str[i]) {
-                ++count;
-            }
-        }
-        return count;
-    }
+    console.log(binaryIndexedTree.getSummary(10));
+
+    // const arr = [undefined, 1, 7, 3, 0, 5, 8, 3, 2, 6, 2, 1, 1, 4, 5];
+    // const _binary = [];
+    // const _count1 = [];
+    // const tree = [0];
+    //
+    // for (let i = 0, l = arr.length; i < l; ++i) {
+    //     _binary[i] = i.toString(2);
+    //     _count1[i] = countI(_binary[i]);
+    // }
+    //
+    // for (let i = 1, l = arr.length; i < l; ++i) {
+    //     if (_count1[i] === _count1[i - 1]) {
+    //         tree[i] = tree[i - 1] + arr[i];
+    //     } else if (_count1[i] > _count1[i - 1]) {
+    //         tree[i] = arr[i];
+    //     } else if (_count1[i] < _count1[i - 1]) {
+    //         let indexLast = i - 1;
+    //         let binaryLast = _binary[indexLast];
+    //         const countThis = _count1[i];
+    //         tree[i] = arr[i];
+    //
+    //         while (_count1[indexLast] >= countThis) {
+    //             tree[i] += tree[indexLast];
+    //             indexLast = indexLast - (indexLast & -indexLast);
+    //             binaryLast = _binary[indexLast];
+    //         }
+    //     }
+    // }
+    //
+    // console.log(tree);
+    //
+    // function countI(str) {
+    //     let count = 0;
+    //     for (let i = 0, l = str.length; i < l; ++i) {
+    //         if ('1' === str[i]) {
+    //             ++count;
+    //         }
+    //     }
+    //     return count;
+    // }
 </script>
 </html>

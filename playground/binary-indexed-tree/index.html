@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Binary indexed tree</title>
+</head>
+<body>
+    <h1>See Chrome Devtools!</h1>
+</body>
+
+<script>
+    const arr = [1, 7, 3, 0, 5, 8, 3, 2, 6, 2, 1, 1, 4, 5];
+    const binaryTree = [];
+    // 让下标从 1 开始, 方便计算
+    arr.unshift(undefined);
+
+    calcMatrix();
+
+    console.log('arr', arr);
+    console.table(binaryTree.map(line => {
+        for (let i = 0, l = line.length; i < l; ++i) {
+            if (undefined === line[i]) {
+                line[i] = '';
+            }
+        }
+
+        return line;
+    }));
+
+    function countI(str) {
+        let count = 0;
+        for (let i = 0, l = str.length; i < l; ++i) {
+            if ('1' === str[i]) {
+                ++count;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * 计算前 n 位的和
+     * @param index {number}
+     */
+    function calcSum(index) {
+        let sum = 0;
+        let binary = index.toString(2);
+        let count = countI(binary);
+
+        for (let i = binary.length - 1; i >= 0 && count > 0; --i) {
+            if ('1' === binary[i]) {
+                sum += binaryTree[count][parseInt(binary, 2)];
+                --count;
+                binary = binary.slice(0, i) + '0' + binary.slice(i + 1);
+            }
+        }
+
+        return sum;
+    }
+
+    function calcMatrix() {
+        for (let i = 1, l = arr.length; i < l; ++i) {
+            const binary = i.toString(2);
+            const count = countI(binary);
+
+            if (!binaryTree[count]) {
+                binaryTree[count] = [];
+            }
+
+            binaryTree[count][i] = calcLine(count) + arr[i];
+        }
+    }
+
+    function calcLine(index) {
+        let sum = 0;
+
+        for (let i = 0, l = binaryTree[index].length; i < l; ++i) {
+            if (binaryTree[index][i]) {
+                sum += binaryTree[index][i];
+            }
+        }
+
+        return sum;
+    }
+</script>
+</html>

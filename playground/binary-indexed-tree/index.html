@@ -48,8 +48,6 @@
                 } else if (this._count1[i] < this._count1[i - 1]) {
                     // 前一个下标
                     let indexLast = i - 1;
-                    // 前一个下标的具体二进制
-                    let binaryLast = this._binary[indexLast];
                     // 当前 1 的个数
                     const countThis = this._count1[i];
                     // 先加上自己
@@ -61,8 +59,6 @@
                         this._prefix[i] += this._prefix[indexLast];
                         // 去掉最后一个 1
                         indexLast = indexLast - (indexLast & -indexLast);
-                        // 去掉最后一个 1 以后的二进制结果
-                        binaryLast = this._binary[indexLast];
                     }
                 }
             }
@@ -74,7 +70,7 @@
          * @param end
          */
         getScope(start, end) {
-
+            return this.getSummary(end) - this.getSummary(start);
         }
 
         /**
@@ -106,6 +102,7 @@
     const binaryIndexedTree = new BinaryIndexedTree([1, 7, 3, 0, 5, 8, 3, 2, 6, 2, 1, 1, 4, 5]);
 
     console.log(binaryIndexedTree.getSummary(10));
+    console.log(binaryIndexedTree.getScope(6, 10));
 
     // const arr = [undefined, 1, 7, 3, 0, 5, 8, 3, 2, 6, 2, 1, 1, 4, 5];
     // const _binary = [];

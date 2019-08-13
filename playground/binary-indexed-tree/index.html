@@ -15,11 +15,6 @@
     class BinaryIndexedTree {
         _array = [];
         /**
-         * index 对应的二进制字符串，加快计算速度
-         * @type {Array}
-         */
-        _binary = [];
-        /**
          * index 对应的二进制字符串中 1 的数量，加快计算速度
          * @type {Array}
          */
@@ -34,8 +29,7 @@
 
         _init() {
             for (let i = 0, l = this._array.length; i < l; ++i) {
-                this._binary[i] = i.toString(2);
-                this._count1[i] = BinaryIndexedTree.countI(this._binary[i]);
+                this._count1[i] = BinaryIndexedTree.countI(i.toString(2));
             }
 
             for (let i = 1, l = this._array.length; i < l; ++i) {

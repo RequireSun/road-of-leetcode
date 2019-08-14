@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Heap Sort</title>
+</head>
+<body>
+    <h1>See Chrome Devtools!</h1>
+
+</body>
+
+<script type="text/javascript" src="../utils/sort.js"></script>
+
+<script>
+    const origin = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+
+    const tidyUp = (array, start, end) => {
+        let bigger = start * 2 + 1;
+
+        if (bigger >= end) {
+            return;
+        }
+
+        if (bigger + 1 < end && array[bigger] < array[bigger + 1]) {
+            ++bigger;
+        }
+
+        // 就算一样也应该要比较, 以防孙子节点一类的节点有问题
+        if (array[bigger] >= array[start]) {
+            swap(array, start, bigger);
+            // 如果做过交换了, 就去子继续整理, 以便把小值移动到最底层
+            tidyUp(array, bigger, end);
+        }
+    };
+
+    const heapSort = (array) => {
+        // 先从后往前整体排序一次 (n / 2 之前的项都是根节点, 从叶子开始排序可以确保总根一定是最大的)
+        // 中间那个点作为下标时根本就取不到东西, 要往前一位
+        // (length / 2) * 2 + 1 > length
+        for (let i = Math.floor(array.length / 2) - 1, l = array.length; i >= 0; --i) {
+            tidyUp(array, i, l);
+        }
+
+        for (let l = array.length - 1; l > 0; --l) {
+            swap(array, 0, l);
+            tidyUp(array, 0, l);
+        }
+    };
+
+    heapSort(origin);
+
+    console.log('sort result:', origin);
+</script>
+</html>

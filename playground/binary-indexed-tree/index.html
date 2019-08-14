@@ -30,44 +30,32 @@
             this._init(1);
         }
 
-        _init(start) {
-            for (let i = start, l = this._array.length; i < l; ++i) {
-                this._count1[i] = BinaryIndexedTree.countI(i.toString(2));
-            }
-
-            for (let i = start, l = this._array.length; i < l; ++i) {
-                if (this._count1[i] === this._count1[i - 1]) {
-                    // 如果下一位跟前一位 1 一样, 同级子节点就是累加的
-                    this._prefix[i] = this._prefix[i - 1] + this._array[i];
-                } else if (this._count1[i] > this._count1[i - 1]) {
-                    // 如果下一位 1 多了, 就相当于新开子节点
-                    this._prefix[i] = this._array[i];
-                } else if (this._count1[i] < this._count1[i - 1]) {
-                    // 前一个下标
-                    let indexLast = i - 1;
-                    // 当前 1 的个数
-                    const countThis = this._count1[i];
-                    // 先加上自己
-                    this._prefix[i] = this._array[i];
-
-                    // 只要 1 的数量还大于当前值 (也就是说还在子节点中), 就继续加
-                    while (this._count1[indexLast] >= countThis) {
-                        // 加上对应节点的值
-                        this._prefix[i] += this._prefix[indexLast];
-                        // 去掉最后一个 1
-                        // x & -x 可以求出数字二进制中最后一个 1 的位置
-                        // 详见: ../../TIPS.md
-                        indexLast = indexLast - (indexLast & -indexLast);
-                    }
-                }
-            }
-        }
-
         push(...args) {
             const oldLength = this._array.length;
             this._array.push(...args);
 
             this._init(oldLength);
+        }
+
+        update(pos, newVal) {
+            // 因为数组下标对齐原因，整体后移一位
+            ++pos;
+            const count1 = this._count1[pos];
+            const diff = newVal - this._array[pos];
+            let isOutScope = false;
+
+            this._array[pos] = newVal;
+
+            for (let i = pos, l = this._prefix.length; i < l; ++i) {
+                if (this._count1[i] < count1) {
+                    // 已经断代
+                    isOutScope = true;
+                    this._prefix[i] += diff;
+                } else if (!isOutScope && this._count1[i] === count1) {
+                    // 同层 +1
+                    this._prefix[i] += diff;
+                }
+            }
         }
 
         /**
@@ -103,19 +91,57 @@
             }
             return count;
         }
+
+        _init(start) {
+            for (let i = start, l = this._array.length; i < l; ++i) {
+                this._count1[i] = BinaryIndexedTree.countI(i.toString(2));
+            }
+
+            for (let i = start, l = this._array.length; i < l; ++i) {
+                if (this._count1[i] === this._count1[i - 1]) {
+                    // 如果下一位跟前一位 1 一样, 同级子节点就是累加的
+                    this._prefix[i] = this._prefix[i - 1] + this._array[i];
+                } else if (this._count1[i] > this._count1[i - 1]) {
+                    // 如果下一位 1 多了, 就相当于新开子节点
+                    this._prefix[i] = this._array[i];
+                } else if (this._count1[i] < this._count1[i - 1]) {
+                    // 前一个下标
+                    let indexLast = i - 1;
+                    // 当前 1 的个数
+                    const countThis = this._count1[i];
+                    // 先加上自己
+                    this._prefix[i] = this._array[i];
+
+                    // 只要 1 的数量还大于当前值 (也就是说还在子节点中), 就继续加
+                    while (this._count1[indexLast] >= countThis) {
+                        // 加上对应节点的值
+                        this._prefix[i] += this._prefix[indexLast];
+                        // 去掉最后一个 1
+                        // x & -x 可以求出数字二进制中最后一个 1 的位置
+                        // 详见: ../../TIPS.md
+                        indexLast = indexLast - (indexLast & -indexLast);
+                    }
+                }
+            }
+        }
     }
 
     const origin = [1, 7, 3, 0, 5, 8, 3, 2, 6, 2, 1, 1, 4, 5, 1, 2, 3, 4, 5, 6];
 
     const binaryIndexedTree = new BinaryIndexedTree(origin.slice(0, 14));
 
-    console.log(binaryIndexedTree.getSummary(10));
-    console.log(binaryIndexedTree.getScope(6, 10));
+    console.log('sum(10):', binaryIndexedTree.getSummary(10));
+
+    console.log('scope[6, 10):', binaryIndexedTree.getScope(6, 10));
 
     binaryIndexedTree.push(...origin.slice(14));
 
-    console.log(binaryIndexedTree.getSummary(19));
+    console.log('sum(19):', binaryIndexedTree.getSummary(19));
 
-    console.log(origin.slice(0, 19).reduce((prev, cur) => prev + cur, 0));
+    console.log('loop calc(19):', origin.slice(0, 19).reduce((prev, cur) => prev + cur, 0));
+
+    binaryIndexedTree.update(16, 7);
+
+    console.log('+4 in pos[16] sum(19):', binaryIndexedTree.getSummary(19));
 </script>
 </html>

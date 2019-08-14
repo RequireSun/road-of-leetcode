@@ -9,8 +9,27 @@
 
 </body>
 
-<script>
-    const origin = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+<script type="text/javascript" src="../utils/sort.js"></script>
 
+<script>
+    const origin = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+
+    const selectionSort = (array) => {
+        for (let i = 0, l = array.length; i < l; ++i) {
+            let smallestIndex = i;
+
+            for (let j = i + 1; j < l; ++j) {
+                if (array[i] > array[j]) {
+                    smallestIndex = j;
+                }
+            }
+
+            swap(array, i, smallestIndex);
+        }
+    };
+
+    selectionSort(origin);
+
+    console.log('sort result:', origin);
 </script>
 </html>

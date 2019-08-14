@@ -8,7 +8,8 @@
     <h1>See Chrome Devtools!</h1>
 </body>
 <script>
-    const origin = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const origin1 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const origin2 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
     /**
      * 异或交欢数值
@@ -24,12 +25,26 @@
 
     const bubbleSort = (array) => {
         for (let i = 0, l = array.length; i < l; ++i) {
+            // 加速计算用标志位, 如果这位在遍历完之后还是 false, 就证明整个数组有序了, 不需要再循环浪费时间了
+            let isSwapped = false;
+
             for (let j = 0, k = l - i; j < k; ++j) {
                 if (array[i] > array[j]) {
-
+                    swap(array, i, j);
+                    isSwapped = true;
                 }
+            }
+
+            if (isSwapped === false) {
+                break;
             }
         }
     };
+
+    bubbleSort(origin1);
+    bubbleSort(origin2);
+
+    console.log('sort result1:', origin1);
+    console.log('sort result2:', origin2);
 </script>
 </html>

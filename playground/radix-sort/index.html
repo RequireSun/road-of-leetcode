@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Radix Sort</title>
+</head>
+<body>
+    <h1>See Chrome Devtools!</h1>
+</body>
+
+<script type="text/javascript" src="../utils/sort.js"></script>
+
+<script>
+    let origin = [1, 10, 100, 1000, 98, 67, 3, 28, 67, 888, 777, 777];
+
+    const radixSort = (array) => {
+        const max = Math.max(...array);
+        let remain = `${max}`.length;
+        let mask = 1;
+
+        while (0 < remain) {
+            mask *= 10;
+
+            const buckets = [];
+
+            for (let i = 0, l = array.length; i < l; ++i) {
+                const cur = (array[i] - array[i] % mask) / mask % 10;
+
+                if (!buckets[cur]) {
+                    buckets[cur] = [];
+                }
+
+                buckets[cur].push(array[i]);
+            }
+
+            array = [].concat(...buckets.filter(bucket => bucket));
+
+            --remain;
+        }
+
+        return array;
+    };
+
+    origin = radixSort(origin);
+
+    console.log('sort result:', origin);
+</script>
+</html>

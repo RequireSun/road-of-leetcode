@@ -1,0 +1,24 @@
+
+<script type="text/javascript" src="../utils/sort.js"></script>
+
+<script code-main>
+    const origin = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+
+    const selectionSort = (array) => {
+        for (let i = 0, l = array.length; i < l; ++i) {
+            let smallestIndex = i;
+
+            for (let j = i + 1; j < l; ++j) {
+                if (array[i] > array[j]) {
+                    smallestIndex = j;
+                }
+            }
+
+            swap(array, i, smallestIndex);
+        }
+    };
+
+    selectionSort(origin);
+
+    console.log('sort result:', origin);
+</script>

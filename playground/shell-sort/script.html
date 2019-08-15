@@ -1,0 +1,26 @@
+
+<script type="text/javascript" src="../utils/sort.js"></script>
+
+<script code-main>
+    let origin = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 7, 7, 7];
+
+    const shellSort = (array) => {
+        const l = array.length;
+
+        for (let dis = Math.floor(l / 2); dis >= 1; dis = Math.floor(dis / 2)) {
+            for (let i = 0, d = array.length - dis; i < d; ++i) {
+                for (let j = i + dis; j < l; j += dis) {
+                    let cur = j;
+
+                    while (cur - dis >= 0 && array[cur] < array[cur - dis]) {
+                        swap(array, cur - dis, cur);
+                    }
+                }
+            }
+        }
+    };
+
+    shellSort(origin);
+
+    console.log('sort result:', origin);
+</script>

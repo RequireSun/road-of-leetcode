@@ -1,0 +1,51 @@
+
+<script type="text/javascript" src="../utils/sort.js"></script>
+
+<script code-main>
+    let origin = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 7, 7, 7];
+
+    const quickSort = (array, start, end) => {
+        if (start >= end - 1) {
+            return;
+        }
+        let right = end - 1;
+        let left = start;
+        // 基础版选最后一项
+        let sig = array[right];
+
+        while (left < right) {
+            while (array[left] < sig && left < right) {
+                ++left;
+            }
+
+            if (left < right) {
+                // 交换位置后, 标志位跑到了左边, 右边最后一位已经有序了, 前移
+                swap(array, left, right);
+                --right;
+            } else {
+                break;
+            }
+
+            while (array[right] > sig && right > left) {
+                --right;
+            }
+
+            if (left < right) {
+                // 交换位置后, 标志位跑到了右边, 左边最后一位已经有序了, 后移
+                swap(array, left, right);
+                ++left;
+            } else {
+                break;
+            }
+        }
+
+        // 下标大 1, 所以这里不需要 -1
+        // 上面流程已经保证了左只要大于等于右就会跳出, 所以这里 left 和 right 应该是一样的
+        quickSort(array, start, left);
+        quickSort(array, left + 1, end);
+    };
+
+    quickSort(origin, 0, origin.length);
+
+    console.log('sort result:', origin);
+</script>

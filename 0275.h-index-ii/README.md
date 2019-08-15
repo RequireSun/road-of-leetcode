@@ -14,4 +14,4 @@
 
 算数算了半天算不对, 最后去找了个这个直接抄过来了.
 
-![成绩](.assets/binary-search.png)
+![成绩](assets/binary-search.png)

@@ -28,4 +28,4 @@ Q = A & B
 
 不停继续这一循环, 直至进位为 0.
 
-![成绩](.assets/binary.png)
+![成绩](assets/binary.png)

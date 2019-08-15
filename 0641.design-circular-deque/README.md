@@ -8,4 +8,4 @@
 
 然后存一个 head 一个 tail, 快速取双端的值.
 
-![成绩](.assets/normal.png)
+![成绩](assets/normal.png)

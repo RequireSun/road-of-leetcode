@@ -1,0 +1,62 @@
+
+<script type="text/javascript" src="../utils/sort.js"></script>
+
+<script code-main>
+    let origin = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 7, 7, 7];
+
+    const mergeSort = (array) => {
+        let temp;
+        let another = [];
+
+        for (let i = 1, l = array.length; i < l; i *= 2) {
+            // 跳格, 而且如果最后只剩一组了, 就不要再比了
+            for (let j = 0; j < l - i; j += i * 2) {
+                let cur = j;
+                let first = j;
+                let last = j + i;
+                const end = Math.min(j + i * 2, l);
+
+                while (first < j + i && last < end) {
+                    if (array[first] <= array[last]) {
+                        // 前面的小于等于后面的, 就先搞前面的, 保持整体有序
+                        another[cur] = array[first];
+                        ++first;
+                    } else {
+                        another[cur] = array[last];
+                        ++last;
+                    }
+
+                    ++cur;
+                }
+
+                if (first < j + i) {
+                    // 前面没处理完
+                    for (; first < j + i; ++first, ++cur) {
+                        another[cur] = array[first];
+                    }
+                } else if (last < end) {
+                    for (; last < end; ++last, ++cur) {
+                        another[cur] = array[last];
+                    }
+                }
+            }
+
+            // 如果就是最后只剩单独一组的情况, 要把这一组拷过去
+            if (l % (i * 2) <= i) {
+                for (let j = l - (l % (i * 2)); j < l; ++j) {
+                    another[j] = array[j];
+                }
+            }
+
+            temp = another;
+            another = array;
+            array = temp;
+        }
+
+        return array;
+    };
+
+    origin = mergeSort(origin);
+
+    console.log('sort result:', origin);
+</script>

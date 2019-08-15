@@ -1,0 +1,31 @@
+<script type="text/javascript" src="../utils/sort.js"></script>
+
+<script code-main>
+    const origin = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 7, 7, 7];
+
+    const countingSort = (array) => {
+        const cache = [];
+
+        for (let i = 0, l = array.length; i < l; ++i) {
+            if (!cache[array[i]]) {
+                cache[array[i]] = [];
+            }
+
+            cache[array[i]].push(array[i]);
+        }
+
+        let float = array.length - 1;
+
+        for (let l = cache.length - 1; l >= 0; --l) {
+            if (cache[l]) {
+                while (cache[l].length) {
+                    array[float--] = cache[l].pop();
+                }
+            }
+        }
+    };
+
+    countingSort(origin);
+
+    console.log('sort result:', origin);
+</script>

@@ -1,0 +1,24 @@
+{
+  "name": "road-of-leetcode",
+  "version": "1.0.0",
+  "description": "早就想搞了, 是懒癌, 都是懒癌先动的手.",
+  "main": "index.js",
+  "scripts": {
+    "build:site": "node ./.scripts/build-site.js",
+    "test": "echo \"no test script\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RequireSun/road-of-leetcode.git"
+  },
+  "author": "RequireSun <kelvinlpsun@hotmail.com>",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/RequireSun/road-of-leetcode/issues"
+  },
+  "homepage": "https://github.com/RequireSun/road-of-leetcode#readme",
+  "devDependencies": {
+    "art-template": "^4.13.2",
+    "marked": "^0.7.0"
+  }
+}

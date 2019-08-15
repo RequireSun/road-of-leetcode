@@ -1,6 +1,6 @@
 # 0670. 最大交换
 
-## 解法 1 (max-value.js)
+## 解法 1 ([max-value.js](./max-value.js))
 
 将整个字符串打散重组, 排序后与原字符串进行对比, 找到第一位不一样的就进行查找交换.
 
@@ -12,9 +12,9 @@
 
 后面又要进行两次搜索 (一次从前向后查找第一个不一样的数字, 一次从后向前, 寻找第一个值等于 max 的位置), 复杂度 o(n).
 
-![成绩](.assets/max-value.png)
+![成绩](assets/max-value.png)
 
-## 解法 2 (recursion.js)
+## 解法 2 ([recursion.js](./recursion.js))
 
 将数字拆分, 所有位取 max.
 
@@ -28,4 +28,4 @@
 
 事实证明 javascript 内 Math 的实现还是靠谱的.
 
-![成绩](.assets/recursion.png)
+![成绩](assets/recursion.png)

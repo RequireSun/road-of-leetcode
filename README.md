@@ -1,4 +1,11 @@
-# 我的 leetcode 解题之路
+我的 leetcode 解题之路
+===
+
+[![Build Status](https://travis-ci.org/RequireSun/road-of-leetcode.svg?branch=master)](https://travis-ci.org/RequireSun/road-of-leetcode)
+
+GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun.github.io/road-of-leetcode/)
+
+## LeetCode
 
 早就想搞了, 是懒癌, 都是懒癌先动的手.
 
@@ -56,6 +63,34 @@
 
 + [0670. 最大交换](0670.maximum-swap)
 
-## 数据结构
+## 数据结构 & 算法
+
+主页: [数据结构与算法](./playground)
+
+### 数据结构
 
 + [树状数组(二叉索引树)](playground/binary-indexed-tree)
+
+### 算法
+
++ [冒泡排序](playground/bubble-sort)
+
+## 小技巧
+
+链接: [./TIPS](./TIPS)
+
+## 碎碎念
+
+GitHub Page 有点弱智, 符号开头的路径, 图片永远 404. 估计要么是直接忽略了, 要么被 parse 了. 但我并不知道具体的转义规则, 真的好蛋疼.
+
+## Powered By
+
+[Travis-CI](https://travis-ci.org/)
+
+[art-template](https://aui.github.io/art-template/)
+
+[Marked.js](https://marked.js.org/)
+
+[GitHub Markdown CSS](https://sindresorhus.com/github-markdown-css/)
+
+[highlight.js](https://highlightjs.org/)

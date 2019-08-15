@@ -6,7 +6,7 @@
 
 效率超级低, 字符串之间两两对比生成矩阵的复杂度就已经达到了 `n * n * l (长度) / 2` 的 O(n^2) 复杂度. 
 
-![成绩](.assets/dynamic-programming.png)
+![成绩](assets/dynamic-programming.png)
 
 ## 解法 2 (character-replace.js)
 
@@ -36,4 +36,4 @@
 
 忘记了之前参考的谁了, 确实牛逼.
 
-![成绩](.assets/character-replace.png)
+![成绩](assets/character-replace.png)

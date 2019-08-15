@@ -79,13 +79,13 @@ _p = _p.then(files => {
         const _ps = [];
 
         if (README) {
-            _ps.push(pReadFile(README).then(content => {
+            _ps.push(pReadFile(README, 'utf-8').then(content => {
                 file.contentREADME = content;
             }));
         }
 
         if (script) {
-            _ps.push(pReadFile(script).then(content => {
+            _ps.push(pReadFile(script, 'utf-8').then(content => {
                 file.contentScript = content;
             }));
         }
@@ -97,19 +97,25 @@ _p = _p.then(files => {
 // 渲染模板
 _p = _p.then(files => {
     console.log('渲染模板...');
-    return Promise.all(files.map(file => {
-        file.result = tIndex({
-            title: '',
-            content: file.contentREADME || '',
-            script: file.contentScript || '',
-        });
 
-        return file;
-    }));
+    for (let i = 0, l = files.length; i < l; ++i) {
+        files[i].result = tIndex({
+            title: '',
+            content: files[i].contentREADME || '',
+            script: files[i].contentScript || '',
+        });
+    }
+
+    return files;
 });
 
 // 写结果
 _p = _p.then(files => {
-    console.log('结果输出...');
-    return files.map(file => pWriteFile(path.join(file.path, 'index.html'), file.result));
+    console.log('结果输出...', files);
+
+    return files.map(file => {
+        // console.log(file);
+
+        return pWriteFile(path.join(file.path, 'index.html'), file.result);
+    });
 });

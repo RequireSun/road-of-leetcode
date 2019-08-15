@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/RequireSun/road-of-leetcode#readme",
   "devDependencies": {
+    "art-template": "^4.13.2",
     "marked": "^0.7.0"
   }
 }

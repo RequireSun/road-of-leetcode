@@ -14,4 +14,4 @@
 
 于是便这么做了, 64ms 91%, 成了. 
 
-![成绩](.assets/chinese-style.png)
+![成绩](assets/chinese-style.png)

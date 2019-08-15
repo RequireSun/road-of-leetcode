@@ -14,7 +14,7 @@
 
 如果上个符号是乘除, 需要把之前的结果 pop 出一项来, 计算出结果后再 push 回去.
 
-![成绩](.assets/stack.png)
+![成绩](assets/stack.png)
 
 ### 思路来源
 

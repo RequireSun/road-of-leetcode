@@ -6,4 +6,4 @@
 
 我曾经试过用 map 保存, 或者是先排序后查找, 但效率都不如直接搜索高.
 
-![成绩](.assets/mark.png)
+![成绩](assets/mark.png)

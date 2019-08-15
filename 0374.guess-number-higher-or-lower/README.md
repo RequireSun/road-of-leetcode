@@ -6,4 +6,4 @@
 
 就是二分查找, 没别的可能了.
 
-![成绩](.assets/binary.png)
+![成绩](assets/binary.png)

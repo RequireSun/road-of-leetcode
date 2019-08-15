@@ -12,4 +12,4 @@
 
 有效的规避了有向图中环判断的操作, 这玩意太难写了.
 
-![成绩](.assets/bipartite-graph.png)
+![成绩](assets/bipartite-graph.png)

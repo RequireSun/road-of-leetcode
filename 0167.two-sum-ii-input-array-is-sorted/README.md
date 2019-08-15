@@ -4,4 +4,4 @@
 
 从两端开始向内收缩, 很原始.
 
-![成绩](.assets/both-ends.png)
+![成绩](assets/both-ends.png)

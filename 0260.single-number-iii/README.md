@@ -4,7 +4,7 @@
 
 最简单的思路, 往 set 里塞数字, 没有就新增, 有就删除.
 
-![成绩](.assets/set.png)
+![成绩](assets/set.png)
 
 ## 解法 2 (xor.js)
 
@@ -36,4 +36,4 @@ A xor B xor C xor A xor B === C
 
 [https://leetcode.com/problems/single-number-iii/discuss/277200/xor](https://leetcode.com/problems/single-number-iii/discuss/277200/xor)
 
-![成绩](.assets/xor.png)
+![成绩](assets/xor.png)

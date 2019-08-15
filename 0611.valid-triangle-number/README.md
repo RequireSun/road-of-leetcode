@@ -4,7 +4,7 @@
 
 暴力破解, 直接三层循环判断每个三角形是否存在.
 
-![成绩](.assets/noob.png)
+![成绩](assets/noob.png)
 
 ## 解法 2 (both-ends.js)
 
@@ -24,7 +24,7 @@
 
 最终左右相遇, 完成一次遍历, 缩小最长边大小, 重复上面的行为.
 
-![成绩](.assets/both-ends.png)
+![成绩](assets/both-ends.png)
 
 ### 思路来源
 

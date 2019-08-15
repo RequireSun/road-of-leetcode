@@ -4,7 +4,7 @@
 
 最直白的做法, 直接读两个链表, 将内部数据全读出来然后一个一个加起来, 形成新链表.
 
-![成绩](.assets/stack1.png)
+![成绩](assets/stack1.png)
 
 ### 优化点
 
@@ -18,7 +18,7 @@
 
 1 & 2 两种方法里, 竟然是第二种的效率更高. 我猜大概是因为对对象的引用进行数组 push pop 操作的消耗太大导致的.
 
-![成绩](.assets/stack2.png)
+![成绩](assets/stack2.png)
 
 ## 解法 2 (recursion.js)
 
@@ -50,4 +50,4 @@
 
 1. 这样最后长的那根链表就是最终的结果了, 直接返回
 
-![成绩](.assets/recursion.png)
+![成绩](assets/recursion.png)

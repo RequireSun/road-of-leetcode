@@ -92,3 +92,5 @@ GitHub Page 有点弱智, 符号开头的路径, 图片永远 404. 估计要么�
 [Marked.js](https://marked.js.org/)
 
 [GitHub Markdown CSS](https://sindresorhus.com/github-markdown-css/)
+
+[highlight.js](https://highlightjs.org/)

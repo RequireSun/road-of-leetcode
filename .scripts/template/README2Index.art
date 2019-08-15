@@ -5,6 +5,8 @@
     <title><%= title %></title>
 </head>
 <body>
+    <h1>See Chrome Devtools!</h1>
+
     <%- content %>
 </body>
 

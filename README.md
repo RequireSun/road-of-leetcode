@@ -77,4 +77,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 ![test pic](./0012.integer-to-roman/test-pic.png)
 
+![test pic](./0012.integer-to-roman/_assets/remainder.png)
+
 ![test pic](./0012.integer-to-roman/.assets/remainder.png)
+
+![test pic](./0012.integer-to-roman/assets/remainder.png)

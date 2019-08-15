@@ -3,6 +3,7 @@
 const fs = require('fs');
 const { promisify } = require('util');
 const path = require('path');
+const marked = require('marked');
 const ART = require('art-template');
 
 const pReadDir = promisify(fs.readdir);
@@ -99,9 +100,11 @@ _p = _p.then(files => {
     console.log('渲染模板...');
 
     for (let i = 0, l = files.length; i < l; ++i) {
+        const markdown = files[i].contentREADME ? marked(files[i].contentREADME) : '';
+
         files[i].result = tIndex({
             title: '',
-            content: files[i].contentREADME || '',
+            content: markdown,
             script: files[i].contentScript || '',
         });
     }

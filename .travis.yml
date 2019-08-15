@@ -6,9 +6,11 @@ node_js:
 before_install:
   npm install -g yarn
 
-script:
-  - yarn install
-  - yarn build:site
+install:
+  yarn install
+
+before_deploy:
+  yarn build:site
 
 deploy:
   provider: pages

@@ -37,7 +37,9 @@
 </head>
 <body>
     <article class="markdown-body">
+        <% if (!!script) { %>
         <h1 style="padding:10px;background-color: #0984dc;color:#fff;">See Chrome Devtools!</h1>
+        <% } %>
 
         <%- content %>
     </article>

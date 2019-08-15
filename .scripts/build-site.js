@@ -99,6 +99,8 @@ _p = _p.then(files => {
     console.log('渲染模板...');
 
     for (let i = 0, l = files.length; i < l; ++i) {
+        console.log(files[i]);
+
         files[i].result = tIndex({
             title: '',
             content: files[i].contentREADME || '',

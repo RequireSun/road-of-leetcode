@@ -91,9 +91,11 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [基数排序](playground/radix-sort)
 
-## 小技巧
+## 其他内容
 
-链接: [./TIPS](./TIPS)
+[一些小技巧](./TIPS)
+
+[基础知识](./KNOWLEDGE)
 
 ## 碎碎念
 

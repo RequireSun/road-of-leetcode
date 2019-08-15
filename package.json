@@ -4,7 +4,7 @@
   "description": "早就想搞了, 是懒癌, 都是懒癌先动的手.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:site": "node ./.scripts/build-site.js"
   },
   "repository": {
     "type": "git",

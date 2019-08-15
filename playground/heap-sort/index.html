@@ -41,7 +41,28 @@
         <h1 style="padding:10px;background-color: #0984dc;color:#fff;">See Chrome Devtools!</h1>
         
 
-        
+        <h1 id="堆排序">堆排序</h1>
+<ul>
+<li><p>稳定性</p>
+<p>  不稳定（树结构形成时的形态可能会让后方元素出现在前面） </p>
+</li>
+<li><p>复杂度</p>
+<ul>
+<li><p>时间复杂度</p>
+<p>  非常稳定，永远 O(n(log n))</p>
+</li>
+<li><p>空间复杂度</p>
+<p>  O(1)</p>
+</li>
+</ul>
+</li>
+<li><p>原理</p>
+<p>  将前 n 个数字搞成一个大（小）堆，然后把最大的数移到最后，继续整理前 n - 1 个数，不断整理。</p>
+<p>  注意：开始的时候要从后往前倒序初始化一次堆才行。</p>
+<p>  <img src="assets/hand-painted.png" alt="手绘"></p>
+</li>
+</ul>
+
     </article>
 
     <div class="code-area"></div>

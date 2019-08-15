@@ -41,7 +41,27 @@
         <h1 style="padding:10px;background-color: #0984dc;color:#fff;">See Chrome Devtools!</h1>
         
 
-        
+        <h1 id="基数排序">基数排序</h1>
+<ul>
+<li><p>稳定性</p>
+<p>  稳定（只能排数字，从个位开始比较的）</p>
+</li>
+<li><p>复杂度</p>
+<ul>
+<li><p>时间复杂度</p>
+<p>  O(n*r)（r 是数字长度）</p>
+</li>
+<li><p>空间复杂度</p>
+<p>  O(n+r)（r 是数字长度）</p>
+</li>
+</ul>
+</li>
+<li><p>原理</p>
+<p>  先根据个位将数组排好，然后是十位，百位，不断向前，最后整个都是有序的。</p>
+<p>  中间需要借助队列空间来把不同尾号的结果存起来，最后再把队列全都吐出来，组装结果数组。</p>
+</li>
+</ul>
+
     </article>
 
     <div class="code-area"></div>

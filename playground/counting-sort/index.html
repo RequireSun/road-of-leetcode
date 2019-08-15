@@ -41,7 +41,28 @@
         <h1 style="padding:10px;background-color: #0984dc;color:#fff;">See Chrome Devtools!</h1>
         
 
-        
+        <h1 id="计数排序">计数排序</h1>
+<ul>
+<li><p>稳定性</p>
+<p>  稳定（可以做桶，然后反向填充结果数组）</p>
+</li>
+<li><p>复杂度</p>
+<ul>
+<li><p>时间复杂度</p>
+<p>  n + r（r 为最大值）</p>
+<p>  因为要遍历一整遍。</p>
+</li>
+<li><p>空间复杂度</p>
+<p>  n + r（r 为最大值）</p>
+<p>  需要生成一个数组来保存这些数据。</p>
+</li>
+</ul>
+</li>
+<li><p>原理</p>
+<p>  统计数字出现的次数，然后重新生成一个排好了的。挺蠢的，数字只要太大就会爆炸。但因为不涉及比较，所以范围较小时非常快。</p>
+</li>
+</ul>
+
     </article>
 
     <div class="code-area"></div>

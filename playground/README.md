@@ -3,6 +3,10 @@ Playground
 
 主要是数据结构与算法的内容。
 
+## 数据结构
+
++ [树状数组(二叉索引树)](binary-indexed-tree)
+
 ## 算法
 
 + [冒泡排序](bubble-sort)

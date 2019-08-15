@@ -4,7 +4,8 @@
   "description": "早就想搞了, 是懒癌, 都是懒癌先动的手.",
   "main": "index.js",
   "scripts": {
-    "build:site": "node ./.scripts/build-site.js"
+    "build:site": "node ./.scripts/build-site.js",
+    "test": "echo \"no test script\""
   },
   "repository": {
     "type": "git",

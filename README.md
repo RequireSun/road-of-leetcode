@@ -75,6 +75,22 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [冒泡排序](playground/bubble-sort)
 
++ [选择排序](playground/selection-sort)
+
++ [插入排序](playground/insertion-sort)
+
++ [堆排序](playground/heap-sort)
+
++ [归并排序](playground/merge-sort)
+
++ [快速排序](playground/quick-sort)
+
++ [希尔排序](playground/shell-sort)
+
++ [计数排序](playground/counting-sort)
+
++ [基数排序](playground/radix-sort)
+
 ## 小技巧
 
 链接: [./TIPS](./TIPS)

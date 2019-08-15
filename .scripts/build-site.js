@@ -67,7 +67,8 @@ _p = _p.then(stats => {
                 script,
             }));
         }
-    }));
+        // 要过滤掉没有内容的文件
+    })).then(files => files.filter(file => file && (file.README || file.script)));
 });
 
 // 读取源文件
@@ -110,5 +111,5 @@ _p = _p.then(files => {
 // 写结果
 _p = _p.then(files => {
     console.log('结果输出...');
-    return files.map(file => pWriteFile(path.join(file.path, file.result)));
+    return files.map(file => pWriteFile(path.join(file.path, 'index.html'), file.result));
 });

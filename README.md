@@ -75,6 +75,18 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [冒泡排序](playground/bubble-sort)
 
+## 小技巧
+
+链接: [./TIPS](./TIPS)
+
 ## 碎碎念
 
 GitHub Page 有点弱智, 符号开头的路径, 图片永远 404. 估计要么是直接忽略了, 要么被 parse 了. 但我并不知道具体的转义规则, 真的好蛋疼.
+
+## Powered By
+
+[Travis-CI](https://travis-ci.org/)
+
+[art-template](https://aui.github.io/art-template/)
+
+[Marked.js](https://marked.js.org/)

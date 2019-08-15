@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><%= title %></title>
+    <title></title>
 
     <!-- START github-markdown-css -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,13 +39,74 @@
     <article class="markdown-body">
         <h1 style="padding:10px;background-color: #0984dc;color:#fff;">See Chrome Devtools!</h1>
 
-        <%- content %>
+        <h1 id="冒泡排序">冒泡排序</h1>
+<ul>
+<li><p>稳定性</p>
+<p>  稳定（两数若是相同，则直接跳过不予处理）</p>
+</li>
+<li><p>复杂度</p>
+<ul>
+<li><p>时间复杂度</p>
+<p>  O(n) ~ O(n^2)</p>
+<ul>
+<li><p>最好情况：</p>
+<p>  数组有序</p>
+</li>
+<li><p>最坏情况：</p>
+<p>  数组逆序</p>
+</li>
+</ul>
+</li>
+<li><p>空间复杂度</p>
+<p>  O(1)</p>
+<p>  根本就不需要额外空间</p>
+</li>
+</ul>
+</li>
+<li><p>原理</p>
+<p>  从第一位开始遍历，每相近的两个进行比较，将更大的置后，这样一次循环之后即可确保最后一项即为最大值。这样循环遍历 n 次，每次遍历的长度都缩减 1（因为刚才的规律，所以 value(n) &gt; value(n - 1) 总是成立，不需要再遍历那么多了），最终结果就是有序的了。</p>
+</li>
+<li><p>优化</p>
+<p>  按照上文的说法做出来的算法是非常稳定的 O(n^2) 复杂度，无论如何都不会变。这是因为该算法无论数组是否已经有序，都会继续后面的计算，这非常没有必要。可以设置一个标志位，用于标记该次循环是否有进行过数值交换，如果没有发生过交换，则证明数组已有序，无需继续进行排序。</p>
+</li>
+</ul>
+
     </article>
 
     <div class="code-area"></div>
 </body>
 
-<%- script %>
+<script type="text/javascript" src="../utils/sort.js"></script>
+
+<script code-main>
+    const origin1 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const origin2 = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+
+    const bubbleSort = (array) => {
+        for (let i = 0, l = array.length; i < l; ++i) {
+            // 加速计算用标志位, 如果这位在遍历完之后还是 false, 就证明整个数组有序了, 不需要再循环浪费时间了
+            let isSwapped = false;
+
+            for (let j = 0, k = l - i; j < k; ++j) {
+                if (array[j] > array[j + 1]) {
+                    swap(array, j, j + 1);
+                    isSwapped = true;
+                }
+            }
+
+            if (isSwapped === false) {
+                break;
+            }
+        }
+    };
+
+    bubbleSort(origin1);
+    bubbleSort(origin2);
+
+    console.log('sort result1:', origin1);
+    console.log('sort result2:', origin2);
+</script>
+
 
 <script>
     const $codeArea = document.querySelector('.code-area');

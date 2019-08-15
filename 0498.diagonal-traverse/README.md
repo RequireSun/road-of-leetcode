@@ -44,4 +44,4 @@ _注: 奇偶计算从 0 开始_
     ↙ ↗ ↙
     ```
 
-![成绩](.assets/loop.png)
+![成绩](assets/loop.png)

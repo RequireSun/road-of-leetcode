@@ -44,7 +44,7 @@ CSDN 这个说的是一样的思路.
 
     结果: 那就直接换个方法吧.
     
-![成绩](.assets/tree.png)
+![成绩](assets/tree.png)
 
 ## 解法 2 (step-by-step.js)
 
@@ -94,4 +94,4 @@ java 版本 (源版本):
 
 [https://blog.csdn.net/woshinannan741/article/details/51985368](https://blog.csdn.net/woshinannan741/article/details/51985368)
 
-![成绩](.assets/step-by-step.png)
+![成绩](assets/step-by-step.png)

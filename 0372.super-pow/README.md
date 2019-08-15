@@ -44,4 +44,4 @@ ab % k = (a % k)(b % k) % k
 
 [https://leetcode.com/problems/super-pow/discuss/84472/C%2B%2B-Clean-and-Short-Solution](https://leetcode.com/problems/super-pow/discuss/84472/C%2B%2B-Clean-and-Short-Solution)
 
-![成绩](.assets/decompose.png)
+![成绩](assets/decompose.png)

@@ -16,7 +16,7 @@ littleA.end > big.start && littleB.start < big.end
 
 既然整个数组是由 end 从小到大进行排序的, 那么 littleA 一定会比 big 先入队列, big 会因为入队列时已存在重复频段而失败.
 
-![成绩](.assets/loop.png)
+![成绩](assets/loop.png)
 
 ### 思路来源
 

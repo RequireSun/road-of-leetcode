@@ -75,10 +75,6 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [冒泡排序](playground/bubble-sort)
 
-![test pic](./0012.integer-to-roman/test-pic.png)
+## 碎碎念
 
-![test pic](./0012.integer-to-roman/_assets/remainder.png)
-
-![test pic](./0012.integer-to-roman/.assets/remainder.png)
-
-![test pic](./0012.integer-to-roman/assets/remainder.png)
+GitHub Page 有点弱智, 符号开头的路径, 图片永远 404. 估计要么是直接忽略了, 要么被 parse 了. 但我并不知道具体的转义规则, 真的好蛋疼.

@@ -1,4 +1,11 @@
-# 我的 leetcode 解题之路
+我的 leetcode 解题之路
+===
+
+[![Build Status](https://travis-ci.org/RequireSun/road-of-leetcode.svg?branch=master)](https://travis-ci.org/RequireSun/road-of-leetcode)
+
+GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun.github.io/road-of-leetcode/)
+
+## LeetCode
 
 早就想搞了, 是懒癌, 都是懒癌先动的手.
 
@@ -56,6 +63,14 @@
 
 + [0670. 最大交换](0670.maximum-swap)
 
-## 数据结构
+## 数据结构 & 算法
+
+主页: [数据结构与算法](./playground)
+
+### 数据结构
 
 + [树状数组(二叉索引树)](playground/binary-indexed-tree)
+
+### 算法
+
++ [冒泡排序](playground/bubble-sort)

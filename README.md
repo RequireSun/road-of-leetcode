@@ -75,4 +75,6 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [冒泡排序](playground/bubble-sort)
 
-![test pic](./test-pic.png)
+![test pic](./0012.integer-to-roman/test-pic.png)
+
+![test pic](./0012.integer-to-roman/.assets/remainder.png)

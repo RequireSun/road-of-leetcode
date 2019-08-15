@@ -114,7 +114,7 @@ _p = _p.then(files => {
 
 // 写结果
 _p = _p.then(files => {
-    console.log('结果输出...', files);
+    console.log('结果输出...');
 
     return files.map(file => {
         return pWriteFile(path.join(file.path, 'index.html'), file.result);

@@ -74,7 +74,7 @@ _p = _p.then(stats => {
 // 读取源文件
 _p = _p.then(files => {
     console.log('读取文件数据...');
-    return files.map((file) => {
+    return Promise.all(files.map((file) => {
         const { README, script } = file;
         const _ps = [];
 
@@ -91,7 +91,7 @@ _p = _p.then(files => {
         }
 
         return Promise.all(_ps).then(() => file);
-    });
+    }));
 });
 
 // 渲染模板
@@ -99,8 +99,6 @@ _p = _p.then(files => {
     console.log('渲染模板...');
 
     for (let i = 0, l = files.length; i < l; ++i) {
-        console.log(files[i]);
-
         files[i].result = tIndex({
             title: '',
             content: files[i].contentREADME || '',
@@ -116,8 +114,6 @@ _p = _p.then(files => {
     console.log('结果输出...', files);
 
     return files.map(file => {
-        // console.log(file);
-
         return pWriteFile(path.join(file.path, 'index.html'), file.result);
     });
 });

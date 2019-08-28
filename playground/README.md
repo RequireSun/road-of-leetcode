@@ -9,6 +9,8 @@ Playground
 
 ## 算法
 
+### 排序算法
+
 + [冒泡排序](bubble-sort)
 
 + [选择排序](selection-sort)
@@ -26,3 +28,11 @@ Playground
 + [计数排序](counting-sort)
 
 + [基数排序](radix-sort)
+
+#### 排序算法的分类
+
++ 稳定排序与不稳定排序
+
++ 内部排序与外部排序
+
++ 比较排序与非比较排序

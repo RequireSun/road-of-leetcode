@@ -67,6 +67,22 @@ __注意：实际应用中, 可能会因为两值引用同一个引用而导致�
 const array = new Array(1000);
 ```
 
+这样创建出来的数组是有洞的, 但它的效率与通过 push 创建无洞数组差不多:
+
+```
+const array = [];
+
+for (let i = 0; i < 1000; ++i) {
+    array.push(false);
+}
+```
+
+如果只是用来做 0 / 1 的标志位的话, Uint8Array 的效率更高:
+
+```
+const array = new Uint8Array(1000);
+```
+
 参考:
 
 [https://zhuanlan.zhihu.com/p/29650254](https://zhuanlan.zhihu.com/p/29650254)

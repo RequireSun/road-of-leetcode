@@ -18,9 +18,9 @@ var canPartition = function(nums) {
 
     sum /= 2;
     // 这一步十分关键, js 在已经初始化后的数组中的效率与动态插入元素的数组中的效率完全就是两个量级
-    const canDo = new Array(sum + 1);
+    const canDo = new Uint8Array(sum + 1);
 
-    canDo[0] = true;
+    canDo[0] = 1;
 
     for (i = 1; i < l; ++i) {
         // 倒着是为了防止一个小数正序跑的时候把它所有的倍数都标记为 true

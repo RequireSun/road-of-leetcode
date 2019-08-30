@@ -4,7 +4,7 @@
 
 只是说这次数组已经是有序的了.
 
-## 解法 1 (binary-search.js)
+## 解法 1 ([binary-search.js](./binary-search.js))
 
 有序数组再用 map, 这样时间复杂度至少是 n, 就有点浪费时间了.
 

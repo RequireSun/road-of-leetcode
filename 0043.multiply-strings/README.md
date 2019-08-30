@@ -1,6 +1,6 @@
 # 0043. 字符串相乘
 
-## 解法 1 (chinese-style.js)
+## 解法 1 ([chinese-style.js](./chinese-style.js))
 
 我现在每次看到这种实现基本操作的题目, 第一反应都是用位操作做, 这次做完之后发现被血坑, 需要手动再把二进制转成数字 (js parseInt toString 转大数字会有精度损失).
 

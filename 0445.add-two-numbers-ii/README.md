@@ -1,6 +1,6 @@
 # 0445. 两数相加 2
 
-## 解法 1 (stack1.js & stack2.js)
+## 解法 1 ([stack1.js](./stack1.js) & [stack2.js](./stack2.js))
 
 最直白的做法, 直接读两个链表, 将内部数据全读出来然后一个一个加起来, 形成新链表.
 
@@ -20,7 +20,7 @@
 
 ![成绩](assets/stack2.png)
 
-## 解法 2 (recursion.js)
+## 解法 2 ([recursion.js](./recursion.js))
 
 仔细想了想感觉上面的做法还是有点弱智, 很浪费空间代码还不好看.
 

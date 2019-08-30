@@ -2,7 +2,7 @@
 
 这题只要是个正常人就能写出来吧, 不知道这题为什么是 medium.
 
-## 解法 1 (normal.js)
+## 解法 1 ([normal.js](./normal.js))
 
 就是把 length 和 limit 都缓存了, 加速读写.
 

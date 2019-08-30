@@ -2,7 +2,7 @@
 
 公式实在太复杂了, 直接看的答案, 答案的公式我还理解了半天.
 
-## 解法 1 (decompose.js)
+## 解法 1 ([decompose.js](./decompose.js))
 
 取余的分解公式:
 

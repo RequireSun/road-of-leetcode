@@ -48,7 +48,7 @@ or
 
 ## 解法 2 ([dynamic-programming-02.js](./dynamic-programming-02.js))
 
-优化思路:
+### 优化点
 
 1. 仔细观察了下结果矩阵, 发现一个规律, 一旦某一次某个 case 满足了, 那么它下面的 (+1 石头 +2 石头 +3 石头 ...) 所有 case 也都会满足.
 

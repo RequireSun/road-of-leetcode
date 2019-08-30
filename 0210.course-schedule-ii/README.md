@@ -1,5 +1,7 @@
 # 0210. 课程表 2
 
+## 解法 1 ([bipartite-graph.js](./bipartite-graph.js))
+
 使用双向图做, 所有点存在一个数组里, 下标与 ID 一一对应.
 
 `pre` 存该课程的依赖, `next` 存依赖该课程的.

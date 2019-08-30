@@ -1,6 +1,6 @@
 # 0127. 单词接龙
 
-## 解法 1 (dynamic-programming.js)
+## 解法 1 ([dynamic-programming.js](./dynamic-programming.js))
 
 最简单的动态规划算法, 计算关系矩阵, 从开始位置开始不断更新距离数据, 一直到最后的节点为止.
 
@@ -8,7 +8,7 @@
 
 ![成绩](assets/dynamic-programming.png)
 
-## 解法 2 (character-replace.js)
+## 解法 2 ([character-replace.js](./character-replace.js))
 
 因为字母的可能性是有限的, 而且还很小 (26 个), 所以可以将问题转化为遍历这 26 个字母.
 

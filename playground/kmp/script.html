@@ -6,10 +6,20 @@
     const search = 'abcdabd';
 
     function kmp(parent, child) {
-        const next = [-1, child[0] === child[1] ? 1 : 0];
-
-        for (let i = 2, l = child.length; i < l; ++i) {
-            next[i] = child[next[i - 2] + 1] === child[i - 1] ? next[i - 1] + 1 : 0;
+        const next = [-1];
+        var cursorTravel = 0
+        var cursorHead = -1
+ 
+        while (cursorTravel < child.length - 1) {
+            // 等于 -1 表示 next 值连第一位都匹配不上
+            // 所以它的 next 就等于从第一位开始重新匹配 (也就是 0)
+            // 相等表示还能继续推进, 为下一位赋值当前位 +1
+            if (cursorHead === -1 || child[cursorTravel] === child[cursorHead]) {
+                next[++cursorTravel] = ++cursorHead;
+            } else {
+                // 如果匹配不上, 就先把 next 往前推一次, 再看看能不能匹配上
+                cursorHead = next[cursorHead];
+            }
         }
 
         return next;

@@ -1,0 +1,19 @@
+<script code-main>
+    const origin = '';
+    // const search = 'abcabb';
+    // const search = 'aaaaabaab';
+    // const search = 'abcdaabcab';
+    const search = 'abcdabd';
+
+    function kmp(parent, child) {
+        const next = [-1, child[0] === child[1] ? 1 : 0];
+
+        for (let i = 2, l = child.length; i < l; ++i) {
+            next[i] = child[next[i - 2] + 1] === child[i - 1] ? next[i - 1] + 1 : 0;
+        }
+
+        return next;
+    }
+
+    console.log(kmp(origin, search));
+</script>

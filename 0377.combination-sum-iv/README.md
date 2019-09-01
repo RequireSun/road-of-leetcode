@@ -6,7 +6,7 @@
 
 结果最后算超时了.
 
-![成绩](./assets/tree.js)
+![成绩](./assets/tree.png)
 
 ## 解法 2 ([dynamic-programming.js](./dynamic-programming.js))
 
@@ -18,4 +18,4 @@
 
 再经过一定的优化, 前 10%!
 
-![成绩](./assets/dynamic-programming.js)
+![成绩](./assets/dynamic-programming.png)

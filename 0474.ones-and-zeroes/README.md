@@ -10,4 +10,8 @@
 
 最后 `matrix[m][n]` 的值就是结果
 
+### 思路来源
+
+[https://leetcode.com/problems/ones-and-zeroes/discuss/95814/c%2B%2B-DP-solution-with-comments](https://leetcode.com/problems/ones-and-zeroes/discuss/95814/c%2B%2B-DP-solution-with-comments)
+
 ![成绩](./assets/dynamic-programming.png)

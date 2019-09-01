@@ -37,6 +37,10 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0275. H 指数 2](0275.h-index-ii)
 
++ [0322. 硬币兑换](0322.coin-change)
+
+    __TODO__ 性能尚未到达前 10%
+
 + [0343. 整数拆分](0343.integer-break)
 
 + [0350. 两个数组的交集 2](0350.intersection-of-two-arrays-ii)
@@ -46,6 +50,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 + [0372. 超级次方](0372.super-pow)
 
 + [0374. 猜数字大小](0374.guess-number-higher-or-lower)
+
++ [0377. 组合总和](0377.combination-sum-iv)
 
 + [0383. 赎金信](0383.ransom-note)
 

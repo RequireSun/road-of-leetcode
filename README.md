@@ -81,6 +81,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0641. 设计循环双端队列](0641.design-circular-deque)
 
++ [0645. 错误的集合](0645.set-mismatch)
+
 + [0670. 最大交换](0670.maximum-swap)
 
 + [0796. 旋转字符串](0796.rotate-string)

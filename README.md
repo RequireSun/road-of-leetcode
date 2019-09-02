@@ -17,6 +17,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0015. 3 数字之和](0015.3-sum)
 
++ [0022. 括号生成](0022.generate-parentheses)
+
 + [0043. 字符串相乘](0043.multiply-strings)
 
 + [0127. 单词接龙](0127.word-ladder)

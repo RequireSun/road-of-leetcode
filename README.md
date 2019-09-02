@@ -83,6 +83,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0796. 旋转字符串](0796.rotate-string)
 
++ [0870. 优势洗牌](0870.advantage-shuffle)
+
 ## 数据结构 & 算法
 
 主页: [数据结构与算法](./playground)

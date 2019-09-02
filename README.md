@@ -65,6 +65,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0435. 无重叠区间](0435.non-overlapping-intervals)
 
++ [0442. 找出数组中所有重复的数字](0442.find-all-duplicates-in-an-array)
+
 + [0445. 两数相加 2](0445.add-two-numbers-ii)
 
 + [0463. 岛屿的周长](0463.island-perimeter)

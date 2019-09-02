@@ -26,4 +26,8 @@ _Ps: 内存使用打败了 50% 的人_
 
 标记的时候只改变目标位置的符号, 这样就可以通过正负来判断标记.
 
+### 思路来源
+
+[https://leetcode.com/problems/find-all-duplicates-in-an-array/discuss/92387/Java-Simple-Solution](https://leetcode.com/problems/find-all-duplicates-in-an-array/discuss/92387/Java-Simple-Solution)
+
 ![成绩](./assets/negative.png)

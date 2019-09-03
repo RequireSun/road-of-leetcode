@@ -87,6 +87,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0670. 最大交换](0670.maximum-swap)
 
++ [0740. 删除与获得点数](0740.delete-and-earn)
+
 + [0796. 旋转字符串](0796.rotate-string)
 
 + [0870. 优势洗牌](0870.advantage-shuffle)

@@ -87,7 +87,7 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0670. 最大交换](0670.maximum-swap)
 
-+ [0688. “马”在棋盘上的概率](0668.knight-probability-in-chessboard)
++ [0688. “马”在棋盘上的概率](0688.knight-probability-in-chessboard)
 
 + [0725. 分割链表](0725.split-linked-list-in-parts)
 

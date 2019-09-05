@@ -97,6 +97,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0796. 旋转字符串](0796.rotate-string)
 
++ [0865. 具有所有最深结点的最小子树](0865.smallest-subtree-with-all-the-deepest-nodes)
+
 + [0870. 优势洗牌](0870.advantage-shuffle)
 
 + [1140. 石子游戏 2](1140.stone-game-ii)

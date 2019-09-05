@@ -34,6 +34,10 @@ max(me) = min(you)
 
 但这个值是永远不会变的, 所以可以用矩阵来保存计算结果加速计算.
 
+### 思路来源
+
+[https://leetcode.com/problems/stone-game-ii/discuss/345354/Java-DP-with-memorization-easy-to-understand(with-explanation)](https://leetcode.com/problems/stone-game-ii/discuss/345354/Java-DP-with-memorization-easy-to-understand(with-explanation))
+
 ![成绩](./assets/dynamic-programming.png)
 
 ~~所以如果我方想要拿最多, 题目就可以分解为:~~

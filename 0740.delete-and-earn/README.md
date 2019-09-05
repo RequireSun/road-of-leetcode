@@ -37,7 +37,7 @@ take = skipLast + cur;
 skip = Math.max(takeLast, skipLast);
 ```
 
-### 优化思路
+### 优化点
 
 因为数值 1 < n < 10000, 所以我们搞了个 10001 长度的数组来加速计算.
 

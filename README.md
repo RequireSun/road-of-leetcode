@@ -81,6 +81,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0498. 对角线](0498.diagonal-traverse)
 
++ [0500. 键盘行](0500.keyboard-row)
+
 + [0530. 二叉搜索树的最小绝对差](0530.minimum-absolute-difference-in-bst)
 
 + [0600. 不含连续 1 的非负整数](0600.non-negative-integers-without-consecutive-ones)

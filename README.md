@@ -101,6 +101,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0740. 删除与获得点数](0740.delete-and-earn)
 
++ [0792. 匹配子序列的单词数](0792.number-of-matching-subsequences)
+
 + [0796. 旋转字符串](0796.rotate-string)
 
 + [0865. 具有所有最深结点的最小子树](0865.smallest-subtree-with-all-the-deepest-nodes)

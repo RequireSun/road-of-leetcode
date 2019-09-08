@@ -39,6 +39,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0210. 课程表 2](0210.course-schedule-ii)
 
++ [0220. 存在重复元素 3](0220.contains-duplicate-iii)
+
 + [0227. 基本计算器](0227.basic-calculator-ii)
 
 + [0260. 单个数字 3](0260.single-number-iii)

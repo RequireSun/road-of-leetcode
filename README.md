@@ -85,6 +85,10 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0530. 二叉搜索树的最小绝对差](0530.minimum-absolute-difference-in-bst)
 
++ [0542. 01 矩阵](0542.01-matrix)
+
+    __TODO__ 性能尚未达到前 10%
+
 + [0600. 不含连续 1 的非负整数](0600.non-negative-integers-without-consecutive-ones)
 
 + [0611. 有效三角形的个数](0611.valid-triangle-number)
@@ -99,7 +103,7 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0703. 数据流中的第 K 大的元素](0703.kth-largest-element-in-a-stream)
 
-    __TODO__ 小顶堆手动实现一个
+    __TODO__ 性能尚未达到前 10%, 需要手动实现一个小顶堆
 
 + [0725. 分割链表](0725.split-linked-list-in-parts)
 

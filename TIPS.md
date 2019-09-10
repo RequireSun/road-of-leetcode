@@ -86,3 +86,7 @@ const array = new Uint8Array(1000);
 参考:
 
 [https://zhuanlan.zhihu.com/p/29650254](https://zhuanlan.zhihu.com/p/29650254)
+
+## 作用域链与递归
+
+在递归时, 直接将变量通过参数传入下一个递归体内会比使用作用域链调用上层的变量要快得多.

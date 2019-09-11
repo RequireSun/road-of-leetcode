@@ -8,4 +8,8 @@
 
 一定要搞 visited, 否则连做都做不出来.
 
+### 思路来源
+
+[https://leetcode.com/problems/open-the-lock/discuss/110237/Regular-java-BFS-solution-and-2-end-BFS-solution-with-improvement](https://leetcode.com/problems/open-the-lock/discuss/110237/Regular-java-BFS-solution-and-2-end-BFS-solution-with-improvement)
+
 ![成绩](./assets/bfs.png)

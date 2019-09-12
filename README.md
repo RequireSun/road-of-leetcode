@@ -67,6 +67,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0383. 赎金信](0383.ransom-note)
 
++ [0412. Fizz Buzz](0412.fizz-buzz)
+
 + [0421. 在给定数组中求最大的两数异或值](0421.maximum-xor-of-two-numbers-in-an-array)
 
 + [0435. 无重叠区间](0435.non-overlapping-intervals)

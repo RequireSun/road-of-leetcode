@@ -95,6 +95,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0611. 有效三角形的个数](0611.valid-triangle-number)
 
++ [0638. 购物优惠](0638.shopping-offers)
+
 + [0641. 设计循环双端队列](0641.design-circular-deque)
 
 + [0645. 错误的集合](0645.set-mismatch)

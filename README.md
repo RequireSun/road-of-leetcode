@@ -133,6 +133,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0939. 面积最小的长方形](0939.minimum-area-rectangle)
 
++ [0987. 二叉树的垂序遍历](0987.vertical-order-traversal-of-a-binary-tree)
+
 + [1020. 飞地的数量](1020.number-of-enclaves)
 
 + [1140. 石子游戏 2](1140.stone-game-ii)

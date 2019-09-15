@@ -129,6 +129,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0870. 优势洗牌](0870.advantage-shuffle)
 
++ [0939. 面积最小的长方形](0939.minimum-area-rectangle)
+
 + [1020. 飞地的数量](1020.number-of-enclaves)
 
 + [1140. 石子游戏 2](1140.stone-game-ii)

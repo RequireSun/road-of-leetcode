@@ -21,6 +21,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0043. 字符串相乘](0043.multiply-strings)
 
++ [0048. 图像旋转](0048.rotate-image)
+
 + [0070. 爬楼梯](0070.climbing-stairs)
 
 + [0093. 复原IP地址](0093.restore-ip-addresses)

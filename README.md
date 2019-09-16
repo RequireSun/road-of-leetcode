@@ -95,6 +95,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
     __TODO__ 性能尚未达到前 10%
 
++ [0559. N 叉树的最大深度](0559.maximum-depth-of-n-ary-tree)
+
 + [0581. 最短无序连续子数组](0581.shortest-unsorted-continuous-subarray)
 
 + [0600. 不含连续 1 的非负整数](0600.non-negative-integers-without-consecutive-ones)

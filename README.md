@@ -83,6 +83,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0463. 岛屿的周长](0463.island-perimeter)
 
++ [0467. 环形字符串中的独立子字符串](0467.unique-substrings-in-wraparound-string)
+
 + [0474. 1 和 0](0474.ones-and-zeroes)
 
 + [0498. 对角线](0498.diagonal-traverse)

@@ -87,6 +87,10 @@ const array = new Uint8Array(1000);
 
 [https://zhuanlan.zhihu.com/p/29650254](https://zhuanlan.zhihu.com/p/29650254)
 
+### Uint8Array & Uint16Array ...
+
+如果是纯数字的定长数组, 用这些数字专用的数组可以比较明显的提高性能 (20ms 左右).
+
 ## 作用域链与递归
 
 在递归时, 直接将变量通过参数传入下一个递归体内会比使用作用域链调用上层的变量要快得多.

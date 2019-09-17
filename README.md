@@ -39,6 +39,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0173. 二叉搜索树迭代器](0173.binary-search-tree-iterator)
 
++ [0189. 旋转数组](0189.rotate-array)
+
 + [0210. 课程表 2](0210.course-schedule-ii)
 
 + [0220. 存在重复元素 3](0220.contains-duplicate-iii)

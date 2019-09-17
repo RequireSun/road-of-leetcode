@@ -62,3 +62,4 @@ typings/
 
 .idea
 road-of-leetcode.iml
+.DS_Store

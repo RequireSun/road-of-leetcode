@@ -129,6 +129,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0752. 开锁](0752.open-the-lock)
 
++ [0754. 组装数字](0754.reach-a-number)
+
 + [0792. 匹配子序列的单词数](0792.number-of-matching-subsequences)
 
 + [0796. 旋转字符串](0796.rotate-string)

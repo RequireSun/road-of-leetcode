@@ -55,6 +55,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0309. 在有冷却时间时最佳的买卖股票时机](0309.best-time-to-buy-and-sell-stock-with-cooldow)
 
++ [0313. 超级丑数](0313.super-ugly-number)
+
 + [0322. 硬币兑换](0322.coin-change)
 
     __TODO__ 性能尚未到达前 10%

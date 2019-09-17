@@ -153,6 +153,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0987. 二叉树的垂序遍历](0987.vertical-order-traversal-of-a-binary-tree)
 
++ [1009. 十进制整数的反码](1009.complement-of-base-10-integer)
+
 + [1020. 飞地的数量](1020.number-of-enclaves)
 
 + [1109. 航班预订统计](1109.corporate-flight-bookings)

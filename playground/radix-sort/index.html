@@ -71,8 +71,6 @@
 <script type="text/javascript" src="../utils/sort.js"></script>
 
 <script code-main>
-    let origin = [1, 10, 100, 1000, 98, 67, 3, 28, 67, 888, 777, 777];
-
     const radixSort = (array) => {
         const max = Math.max(...array);
         let remain = `${max}`.length;
@@ -100,6 +98,8 @@
 
         return array;
     };
+
+    let origin = [1, 10, 100, 1000, 98, 67, 3, 28, 67, 888, 777, 777];
 
     origin = radixSort(origin);
 

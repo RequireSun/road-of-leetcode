@@ -2,8 +2,6 @@
 <script type="text/javascript" src="../utils/sort.js"></script>
 
 <script code-main>
-    const origin = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
-
     const tidyUp = (array, start, end) => {
         let bigger = start * 2 + 1;
 
@@ -36,6 +34,8 @@
             tidyUp(array, 0, l);
         }
     };
+
+    const origin = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 
     heapSort(origin);
 

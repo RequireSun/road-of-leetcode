@@ -213,7 +213,7 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 #### 字符串
 
-+ KMP 算法
++ [KMP 算法](playground/kmp)
 
 ## 其他内容
 

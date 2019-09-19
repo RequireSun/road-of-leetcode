@@ -1,20 +1,40 @@
 <script code-main>
-    const origin = '';
-    // const search = 'abcabb';
-    // const search = 'aaaaabaab';
-    // const search = 'abcdaabcab';
-    const search = 'abcdabd';
-
     function kmp(parent, child) {
+        const next = genNext(child);
+        const lengthParent = parent.length;
+        const lengthChild = child.length;
+        let cursorParent = 0;
+        let cursorChild = 0;
+
+        console.log('parent:', parent, 'child:', child, 'next:', next);
+
+        while (cursorParent < lengthParent) {
+            if (cursorChild === -1 || parent[cursorParent] === child[cursorChild]) {
+                ++cursorParent;
+                ++cursorChild;
+
+                if (cursorChild === lengthChild) {
+                    return cursorParent - cursorChild;
+                }
+            } else {
+                cursorChild = next[cursorChild];
+            }
+        }
+
+        return -1;
+    }
+
+    function genNext(str) {
+        const length = str.length - 1;
         const next = [-1];
-        var cursorTravel = 0
-        var cursorHead = -1
- 
-        while (cursorTravel < child.length - 1) {
+        let cursorTravel = 0;
+        let cursorHead = -1;
+
+        while (cursorTravel < length) {
             // 等于 -1 表示 next 值连第一位都匹配不上
             // 所以它的 next 就等于从第一位开始重新匹配 (也就是 0)
             // 相等表示还能继续推进, 为下一位赋值当前位 +1
-            if (cursorHead === -1 || child[cursorTravel] === child[cursorHead]) {
+            if (cursorHead === -1 || str[cursorTravel] === str[cursorHead]) {
                 next[++cursorTravel] = ++cursorHead;
             } else {
                 // 如果匹配不上, 就先把 next 往前推一次, 再看看能不能匹配上
@@ -25,5 +45,8 @@
         return next;
     }
 
-    console.log(kmp(origin, search));
+    console.log(kmp('abcdabd', 'abcdabd'));
+    console.log(kmp('abcabcabb', 'abcabb'));
+    console.log(kmp('aaaaaaaaaaaabaaaaaaabaaabaaaaaaaabaabaaaaaaaabaaaaaab', 'aaaaabaab'));
+    console.log(kmp('abacabadabacabacabadabacabace', 'abacabadabacabace'));
 </script>

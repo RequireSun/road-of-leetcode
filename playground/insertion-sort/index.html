@@ -83,8 +83,6 @@
 <script type="text/javascript" src="../utils/sort.js"></script>
 
 <script code-main>
-    const origin = [7, 8, 9, 3, 5, 4, 6, 2, 1, 0];
-
     const insertionSort = (array) => {
         for (let i = 0, l = array.length; i < l; ++i) {
             for (let j = i; j > 0 && array[j] < array[j - 1]; --j) {
@@ -92,6 +90,8 @@
             }
         }
     };
+
+    const origin = [7, 8, 9, 3, 5, 4, 6, 2, 1, 0];
 
     insertionSort(origin);
 

@@ -215,6 +215,12 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [KMP 算法](playground/kmp)
 
+#### 经典题目
+
++ [八皇后](playground/eight-queens)
+
+    __TODO__ 没写完
+
 ## 其他内容
 
 [一些小技巧](./TIPS)

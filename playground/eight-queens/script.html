@@ -1,0 +1,109 @@
+<script code-main>
+    /********** 基础版 **********/
+    function eightQueens(row, length, matrix) {
+        if (row > length - 1) {
+            printResult(matrix);
+            return;
+        }
+
+        for (let column = 0; column < length; ++column) {
+            if (checkQueen(row, column, length, matrix)) {
+                matrix[row][column] = 1;
+                eightQueens(row + 1, length, matrix);
+                matrix[row][column] = 0;
+            }
+        }
+    }
+
+    let resultCount = 0;
+
+    function printResult(matrix) {
+        console.log(`result no: ${++resultCount}\r\n` + matrix.map(row => row.join(', ')).join('\r\n'));
+    }
+
+    function checkQueen(row, column, length, matrix) {
+        for (let i = 0; i < length; ++i) {
+            if (i !== column && matrix[row][i]) {
+                return false;
+            }
+            if (i !== row && matrix[i][column]) {
+                return false;
+            }
+        }
+
+        for (let i = 0; i < length; ++i) {
+            if (i !== row) {
+                const diff = i - row;
+
+                if (column - diff >= 0 && column - diff < length && matrix[i][column - diff]) {
+                    return false;
+                }
+                if (column + diff >= 0 && column + diff < length && matrix[i][column + diff]) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    const matrix = [
+        [0, 0, 0, 0, 0, 0, 0, 0, ],
+        [0, 0, 0, 0, 0, 0, 0, 0, ],
+        [0, 0, 0, 0, 0, 0, 0, 0, ],
+        [0, 0, 0, 0, 0, 0, 0, 0, ],
+        [0, 0, 0, 0, 0, 0, 0, 0, ],
+        [0, 0, 0, 0, 0, 0, 0, 0, ],
+        [0, 0, 0, 0, 0, 0, 0, 0, ],
+        [0, 0, 0, 0, 0, 0, 0, 0, ],
+    ];
+
+    eightQueens(0, 8, matrix);
+
+    /********** 标记优化版 **********/
+    let resultCount2 = 0;
+
+    function eightQueens2(row, length, signCol, signLeft, signRight) {
+        if (row >= length) {
+            ++resultCount2;
+            return;
+        }
+
+        for (let column = 0; column < length; ++column) {
+            if (checkQueen2(row, column, signCol, signLeft, signRight)) {
+                setQueen(row, column, signCol, signLeft, signRight);
+                eightQueens2(row + 1, length, signCol, signLeft, signRight);
+                deleteQueen(row, column, signCol, signLeft, signRight);
+            }
+        }
+    }
+
+    function checkQueen2(row, column, signCol, signLeft, signRight) {
+        if (signCol[column]) {
+            return false;
+        }
+        if (signLeft[row + column]) {
+            return false;
+        }
+        if (signRight[row - column]) {
+            return false;
+        }
+        return true;
+    }
+
+    function setQueen(row, column, signCol, signLeft, signRight) {
+        signCol[column] = 1;
+        signLeft[row + column] = 1;
+        signRight[row - column] = 1;
+    }
+
+    function deleteQueen(row, column, signCol, signLeft, signRight) {
+        signCol[column] = 0;
+        signLeft[row + column] = 0;
+        signRight[row - column] = 0;
+    }
+
+    eightQueens2(0, 8, {}, {}, {}, {});
+
+    console.log('count2:', resultCount2);
+</script>

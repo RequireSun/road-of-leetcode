@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <!-- START github-markdown-css -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css">
+    <style>
+        .markdown-body, .code-area {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+
+        @media (max-width: 767px) {
+            .markdown-body, .code-area {
+                padding: 15px;
+            }
+        }
+
+        .markdown-body+.code-area {
+            padding-top: 0;
+        }
+    </style>
+    <!-- END github-markdown-css -->
+
+    <!-- START highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/solarized-light.min.css">
+    <script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+    <script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/languages/javascript.min.js"></script>
+    <!-- END highlight.js -->
+
+</head>
+<body>
+    <article class="markdown-body">
+        
+        <h1 style="padding:10px;background-color: #0984dc;color:#fff;">See Chrome Devtools!</h1>
+        
+
+        <h1 id="八皇后问题">八皇后问题</h1>
+<p><strong>TODO</strong> 继续优化 &amp; 描述</p>
+<h2 id="思路来源">思路来源</h2>
+<p><a href="https://www.jianshu.com/p/65c8c60b83b8">https://www.jianshu.com/p/65c8c60b83b8</a></p>
+
+    </article>
+
+    <div class="code-area"></div>
+</body>
+
+<script code-main>
+    /********** 基础版 **********/
+    function eightQueens(row, length, matrix) {
+        if (row > length - 1) {
+            printResult(matrix);
+            return;
+        }
+
+        for (let column = 0; column < length; ++column) {
+            if (checkQueen(row, column, length, matrix)) {
+                matrix[row][column] = 1;
+                eightQueens(row + 1, length, matrix);
+                matrix[row][column] = 0;
+            }
+        }
+    }
+
+    let resultCount = 0;
+
+    function printResult(matrix) {
+        console.log(`result no: ${++resultCount}\r\n` + matrix.map(row => row.join(', ')).join('\r\n'));
+    }
+
+    function checkQueen(row, column, length, matrix) {
+        for (let i = 0; i < length; ++i) {
+            if (i !== column && matrix[row][i]) {
+                return false;
+            }
+            if (i !== row && matrix[i][column]) {
+                return false;
+            }
+        }
+
+        for (let i = 0; i < length; ++i) {
+            if (i !== row) {
+                const diff = i - row;
+
+                if (column - diff >= 0 && column - diff < length && matrix[i][column - diff]) {
+                    return false;
+                }
+                if (column + diff >= 0 && column + diff < length && matrix[i][column + diff]) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    const matrix = [
+        [0, 0, 0, 0, 0, 0, 0, 0, ],
+        [0, 0, 0, 0, 0, 0, 0, 0, ],
+        [0, 0, 0, 0, 0, 0, 0, 0, ],
+        [0, 0, 0, 0, 0, 0, 0, 0, ],
+        [0, 0, 0, 0, 0, 0, 0, 0, ],
+        [0, 0, 0, 0, 0, 0, 0, 0, ],
+        [0, 0, 0, 0, 0, 0, 0, 0, ],
+        [0, 0, 0, 0, 0, 0, 0, 0, ],
+    ];
+
+    eightQueens(0, 8, matrix);
+
+    /********** 标记优化版 **********/
+    let resultCount2 = 0;
+
+    function eightQueens2(row, length, signCol, signLeft, signRight) {
+        if (row >= length) {
+            ++resultCount2;
+            return;
+        }
+
+        for (let column = 0; column < length; ++column) {
+            if (checkQueen2(row, column, signCol, signLeft, signRight)) {
+                setQueen(row, column, signCol, signLeft, signRight);
+                eightQueens2(row + 1, length, signCol, signLeft, signRight);
+                deleteQueen(row, column, signCol, signLeft, signRight);
+            }
+        }
+    }
+
+    function checkQueen2(row, column, signCol, signLeft, signRight) {
+        if (signCol[column]) {
+            return false;
+        }
+        if (signLeft[row + column]) {
+            return false;
+        }
+        if (signRight[row - column]) {
+            return false;
+        }
+        return true;
+    }
+
+    function setQueen(row, column, signCol, signLeft, signRight) {
+        signCol[column] = 1;
+        signLeft[row + column] = 1;
+        signRight[row - column] = 1;
+    }
+
+    function deleteQueen(row, column, signCol, signLeft, signRight) {
+        signCol[column] = 0;
+        signLeft[row + column] = 0;
+        signRight[row - column] = 0;
+    }
+
+    eightQueens2(0, 8, {}, {}, {}, {});
+
+    console.log('count2:', resultCount2);
+</script>
+
+
+<script>
+    const $codeArea = document.querySelector('.code-area');
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const scripts = document.querySelectorAll('script[code-main]');
+        const fragment = document.createDocumentFragment();
+        const codes = [];
+
+        for (let i = 0, l = scripts.length; i < l; ++i) {
+            const pre = document.createElement('pre');
+            const code = document.createElement('code');
+
+            code.innerHTML = scripts[i].innerHTML;
+            codes.push(code);
+
+            pre.appendChild(code);
+            fragment.appendChild(pre);
+        }
+
+        if ($codeArea) {
+            $codeArea.innerHTML = '';
+            $codeArea.appendChild(fragment);
+        }
+
+        // macro task 挺好的
+        setTimeout(() => {
+            for (let i = 0, l = codes.length; i < l; ++i) {
+                hljs.highlightBlock(codes[i]);
+            }
+        }, 0);
+    });
+</script>
+</html>

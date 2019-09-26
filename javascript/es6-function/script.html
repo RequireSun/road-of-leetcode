@@ -1,0 +1,18 @@
+<script code-main>
+    // 百分百保证有值的默认值写法
+    function func1({ x = 1, y = 2 } = {}) {
+        console.log(x, y);
+    }
+
+    func1();
+    func1({});
+    func1({ x: 3 });
+
+    function func2([x = 1, y = 2] = []) {
+        console.log(x, y);
+    }
+
+    func2();
+    func2([]);
+    func2([3]);
+</script>

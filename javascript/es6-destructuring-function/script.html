@@ -1,0 +1,22 @@
+<script code-main>
+// 参数解构
+function func1([a, b = 2]) {
+    return [a, b, 3, 4, 5];
+}
+// 返回值解构
+const [a, b, c, d, e] = func1([1, undefined]);
+
+// 参数对象解构
+function func2({f, g = 7}) {
+    return { f, g, hh: 8, i: 9, };
+}
+// 返回值对象解构
+const { f, g, hh: h, i, } = func2({ f: 6 });
+
+console.log(a, b, c, d, e, f, g, h, i);
+
+// 解构 es6 Map 的 for...of 循环
+for (const [,val] of new Map([['j', 10], ['k', 11]])) {
+    console.log(val);
+}
+</script>

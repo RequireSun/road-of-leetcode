@@ -1,0 +1,37 @@
+<script code-main>
+    // 多层嵌套解构
+    const { a, e: { d: { b }, c } } = { a: 1, e: { d: { b: 2 }, c: 3 } };
+    // 解构时重命名
+    const { a: d, f: { b: e }, f } = { a: 4, f: { b: 5 } };
+    // 如果不止想取 f 内的数据, 也想取 f, 则需要单独声明一次 f 的取值过程
+    console.log(f);
+    // 给其他变量嵌套赋值 (嵌套赋值时因为语法问题, 需要套括号)
+    const obj = {};
+    const arr = [];
+    ({ f: obj.f, g: arr[0] } = { f: 6, g: 7, });
+    // 解构赋值可以取到继承的属性
+    const parent = { h: 8 };
+    const child = {};
+    Object.setPrototypeOf(child, parent);
+    const { h } = child;
+    // class 写法同样支持
+    class Parent {
+        i = 9;
+    }
+    class Child extends Parent {
+        constructor(props) {
+            super(props);
+        }
+    }
+    const { i } = new Child();
+    // 默认值
+    const { j = 10 } = {};
+    // 对数组也可以使用对象的解构 (数组的本质还是对象)
+    const { 0: k, 1: l } = [11, 12];
+    // 对象更进一步的还能使用计算属性进行解构 (数组的解构做不到)
+    const { [1 - 1]: m } = [13];
+    // 也能做到把属性值拽出来
+    const { length: n } = '12345678911131';
+
+    console.log(a, b, c, d, e, obj, arr, h, i, j, k, l, m, n);
+</script>

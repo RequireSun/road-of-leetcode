@@ -225,6 +225,10 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [解构赋值 - 数组](./javascript/es6-destructuring-array)
 
++ [解构赋值 - 对象](./javascript/es6-destructuring-object)
+
++ [解构赋值 - 函数](./javascript/es6-destructuring-function)
+
 ## 其他内容
 
 [一些小技巧](./TIPS)

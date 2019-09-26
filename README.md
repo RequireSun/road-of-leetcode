@@ -163,9 +163,7 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [1140. 石子游戏 2](1140.stone-game-ii)
 
-## 数据结构 & 算法
-
-主页: [数据结构与算法](./playground)
+## [数据结构 & 算法](./playground)
 
 ### 数据结构
 
@@ -220,6 +218,12 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 + [八皇后](playground/eight-queens)
 
     __TODO__ 没写完
+
+## [前端](./javascript)
+
+### ECMA Script 6
+
++ [解构赋值 - 数组](./javascript/es6-destructuring-array)
 
 ## 其他内容
 

@@ -1,0 +1,36 @@
+<script code-main>
+    // 多层嵌套取值
+    const [a, [[b], c]] = [1, [[2], 3]];
+    // 空过不需要的选项
+    const [, , d] = [2, 3, 4];
+    // 将剩余数组合并为一个数组
+    const [e, , ...f] = [5, 5, 6];
+    // 只要可遍历 (iterable) 就可以使用解构拆分
+    const [g, h] = '78';
+    // 只要可遍历 (iterable) 就可以使用解构拆分
+    const [i, j] = new Set([9, 10]);
+
+    function *iterable() {
+        let i = 10;
+        while(i++ < 15) {
+            yield i;
+        }
+    }
+    // 只要可遍历 (iterable) 就可以使用解构拆分
+    const [k, l, m, n, o] = iterable();
+    // 默认值的使用 (只有 === undefined 才行)
+    const [p = 16, q = 17] = [, undefined];
+
+    let _defaultVal = 16;
+
+    function getDefaultVal() {
+        return _defaultVal += 2;
+    }
+    // 这个默认函数是 lazy execute 的
+    const [r = getDefaultVal(), s = getDefaultVal(), t = getDefaultVal()] = [ , 19, ];
+    // 默认值的互相引用
+    const [u, v = u + 1] = [21, ];
+
+    console.log(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v);
+
+</script>

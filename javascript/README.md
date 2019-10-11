@@ -8,3 +8,5 @@
 + [解构赋值 - 对象](./es6-destructuring-object)
 
 + [解构赋值 - 函数](./es6-destructuring-function)
+
++ [函数 - 尾调用优化](./es6-tail-call)

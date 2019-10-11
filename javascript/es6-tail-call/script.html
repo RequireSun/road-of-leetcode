@@ -1,0 +1,60 @@
+<script code-main>
+    function fibonacciNormal(count) {
+        function fibonacci(n) {
+            if (n <= 1) {
+                return 1;
+            }
+
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+
+        return fibonacci(count);
+    }
+
+    function fibonacciTailCall(count) {
+        function fibonacci(n, ac1 = 1, ac2 = 1) {
+            if (n <= 1) {
+                return ac2;
+            }
+
+            return fibonacci(n - 1, ac2, ac1 + ac2);
+        }
+
+        return fibonacci(count);
+    }
+
+    function fibonacciNormalStrict(count) {
+        'use strict';
+
+        function fibonacci(n) {
+            if (n <= 1) {
+                return 1;
+            }
+
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+
+        return fibonacci(count);
+    }
+
+    function fibonacciTailCallStrict(count) {
+        'use strict';
+
+        function fibonacci(n, ac1 = 1, ac2 = 1) {
+            if (n <= 1) {
+                return ac2;
+            }
+
+            return fibonacci(n - 1, ac2, ac1 + ac2);
+        }
+
+        return fibonacci(count);
+    }
+
+    // 这个算法的计算是按计算机常理的 0 开始的, 所以会有点反人类, 求第 40 位数字需要输入 39
+    // 这个方法求到爆栈也不会超时, 真是牛逼
+    for (const fn of [fibonacciNormal, fibonacciNormalStrict, fibonacciTailCall, fibonacciTailCallStrict]) {
+        const start = Date.now();
+        console.log('%s: %o, use time: %o', fn.name, fn(39), Date.now() - start);
+    }
+</script>

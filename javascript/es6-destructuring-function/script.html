@@ -7,7 +7,7 @@ function func1([a, b = 2]) {
 const [a, b, c, d, e] = func1([1, undefined]);
 
 // 参数对象解构
-function func2({f, g = 7}) {
+function func2({f, g = 7} = {}) {
     return { f, g, hh: 8, i: 9, };
 }
 // 返回值对象解构

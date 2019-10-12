@@ -30,15 +30,107 @@
         };
     };
 
+    // for...of 遍历
     for (const val of testObj1) {
         console.log(val);
     }
 
-    // function testFn() {
-    //     return 6;
-    // }
-    //
-    // testFn[Symbol.iterator] = function () {
-    //
-    // }
+    // 数组解构
+    console.log(...testObj1);
+
+    // 用 yield 可以更简单的实现 iterator
+    const testObj2 = {
+        a: 1,
+        b: 2,
+        c: 3,
+        // 直接当属性写在里面也是可以的
+        *[Symbol.iterator]() {
+            for (const key of Object.keys(this)) {
+                yield this[key];
+            }
+        }
+    };
+
+    // for...of 遍历
+    for (const val of testObj2) {
+        console.log(val);
+    }
+
+    // 数组解构
+    console.log(...testObj2);
+
+    // yield 和 yield* 的不通
+    const testFn1 = function*() {
+        yield testObj1;
+        yield* testObj2;
+    };
+
+    for (const v of testFn1()) {
+        console.log(v);
+    }
+
+    // 通过 next 函数传入的值会变成 yield 表达式的结果
+    const testFn2 = function*() {
+        let val = 0;
+
+        while (true) {
+            val = yield val;
+        }
+    };
+
+    const yieldObj1 = testFn2();
+
+    for (let i = 1; i < 10; ++i) {
+        console.log(yieldObj1.next(i));
+    }
+
+    // throw 的用法
+    const testFn3 = function*() {
+        yield 1;
+        try {
+            yield 2;
+        } catch (ex) {
+            console.error(ex);
+        }
+        yield 3;
+        yield 4;
+        yield 5;
+    };
+
+    const yieldObj2 = testFn3();
+
+    console.log(yieldObj2.next());
+    console.log(yieldObj2.next());
+    // try catch 要写在上次调用完的地方
+    console.log(yieldObj2.throw('err msg'));
+    console.log(yieldObj2.next());
+    console.log(yieldObj2.next());
+
+    const yieldObj3 = testFn2();
+
+    console.log(yieldObj3.next(2));
+    console.log(yieldObj3.next(3));
+    console.log(yieldObj3.return(9));
+    // return 之后就算是结束了
+    console.log(yieldObj3.next(4));
+    console.log(yieldObj3.next(5));
+
+    // yield* 的 generator 嵌套
+    const testFn4 = function*() {
+        yield 3;
+        yield 4;
+        yield 5;
+    };
+
+    const testFn5 = function*() {
+        yield 1;
+        yield 2;
+        yield* testFn4();
+        yield 6;
+        yield 7;
+    };
+
+    for (const v of testFn5()) {
+        console.log(v);
+    }
 </script>

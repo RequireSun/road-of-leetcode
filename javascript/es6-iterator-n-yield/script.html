@@ -43,7 +43,7 @@
         a: 1,
         b: 2,
         c: 3,
-        // 直接当属性写在里面也是可以的
+        // 直接当属性写在里面也是可以的 (而且还能简写, 直接在函数名前面加 * 就行了
         *[Symbol.iterator]() {
             for (const key of Object.keys(this)) {
                 yield this[key];
@@ -132,5 +132,43 @@
 
     for (const v of testFn5()) {
         console.log(v);
+    }
+
+    // generator 的效率也很高, 以下两种二叉树先序遍历的效率是相同的, 题目链接:
+    // https://leetcode.com/problems/binary-tree-preorder-traversal/
+
+    /**
+     * Definition for a binary tree node.
+     * function TreeNode(val) {
+     *     this.val = val;
+     *     this.left = this.right = null;
+     * }
+     */
+    /**
+     * @param {TreeNode} root
+     * @return {number[]}
+     */
+    var preorderTraversal = function(root) {
+        if (root) {
+            return [root.val, ...preorderTraversal(root.left), ...preorderTraversal(root.right)];
+        } else {
+            return [];
+        }
+    };
+
+    /**
+     * @param {TreeNode} root
+     * @return {number[]}
+     */
+    var preorderTraversal = function(root) {
+        return [...preorder(root)];
+    };
+
+    function *preorder(node) {
+        if (node) {
+            yield node.val;
+            yield* preorder(node.left);
+            yield* preorder(node.right);
+        }
     }
 </script>

@@ -171,4 +171,33 @@
             yield* preorder(node.right);
         }
     }
+
+    // generator 实现协程
+    // 操作非常的绕
+    // 虽然实现了资源的及时释放, 但是逻辑非常绕实操难度太高, 所以实战中用的人也不多
+
+    const testFn6 = function* (info) {
+        const result = yield new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(info);
+            }, 2000);
+        });
+        console.log('testFn6 result:', result);
+    };
+
+    const testObj3 = testFn6(3);
+    const testObj4 = testFn6(4);
+    const testObj5 = testFn6(5);
+
+    testObj4.next().value.then((result4) => {
+        return Promise.all([
+            testObj3.next().value,
+            result4,
+            testObj5.next().value,
+        ]);
+    }).then(([result3, result4, result5]) => {
+        testObj4.next(result4);
+        testObj5.next(result5);
+        testObj3.next(result3);
+    })
 </script>

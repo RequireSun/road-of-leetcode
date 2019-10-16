@@ -1,0 +1,10 @@
+<script code-main>
+// 展开三层
+console.log([1, 2, [3, 4, [5, 6, [7, 8, [9]]]]].flat(3));
+// 全展开
+console.log([1, 2, [3, 4, [5, 6, [7, 8, [9]]]]].flat(Infinity));
+// flatMap 我感觉特别多余
+console.log([1, 2, 3, 4].flatMap(x => [x, x * 2]));
+// 只能说是 flat + map 的语法糖吧
+console.log([1, 2, 3, 4].flatMap(x => [[x]]));
+</script>

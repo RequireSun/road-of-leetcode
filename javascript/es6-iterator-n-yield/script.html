@@ -199,5 +199,49 @@
         testObj4.next(result4);
         testObj5.next(result5);
         testObj3.next(result3);
-    })
+    });
+
+    /**
+     * 用 thunk 函数实现 yield 分步控制的自动执行 (依然还是很绕)
+     */
+
+    const thunkedSetTimeout = (time) => {
+        return (callback) => setTimeout(callback.bind(null, null, time), time);
+    };
+
+    const run1 = function (fn) {
+        let gen = fn();
+
+        next();
+
+        /**
+         * 这个函数会被当做带 err 的 callback 传入 generator 返回的函数中
+         * @param err
+         * @param data
+         */
+        function next(err, data) {
+            if (err) {
+                console.error('run1 error:', err);
+                return ;
+            }
+            // 向 generator 里传入你想传入的值
+            const result = gen.next(data);
+
+            // 只要没结束, 就执行 next 返回的函数, 并将当前函数当做回调传入函数中
+            if (!result.done) {
+                result.value(next);
+            }
+        }
+    };
+
+    const testFn7 = function* () {
+        const val1 = yield thunkedSetTimeout(2000);
+        const val2 = yield thunkedSetTimeout(1000);
+        const val3 = yield thunkedSetTimeout(500);
+
+        // 实际上这三个值并不是 thunk 的结果, 而是外面处理完了以后想要传给 generator 的值
+        console.log('thunk finished:', val1, val2, val3);
+    };
+
+    run1(testFn7);
 </script>

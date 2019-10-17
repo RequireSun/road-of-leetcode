@@ -3,6 +3,8 @@
 
 ## ECMA Script 6
 
+特别简单的全都省略, 只写一些容易出错的.
+
 + [解构赋值 - 数组](./es6-destructuring-array)
 
 + [解构赋值 - 对象](./es6-destructuring-object)

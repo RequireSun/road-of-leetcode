@@ -1,0 +1,66 @@
+<script code-main>
+    const obj1 = {};
+
+    const obj2 = new Proxy(obj1, {
+        get: function (target, key, receiver) {
+            console.log(`getting ${key}!`, receiver);
+            return Reflect.get(target, key, receiver);
+        },
+        set: function (target, key, value, receiver) {
+            console.log(`setting ${key}!`, receiver);
+            return Reflect.set(target, key, value, receiver);
+        },
+        has: function (target, key) {
+            console.log(`has ${key}!`);
+            return Reflect.has(target, key);
+        },
+    });
+
+    console.log('obj1(no effect):');
+
+    obj1.a = 1;
+    ++obj1.a;
+    console.log('a' in obj1);
+
+    console.log('obj2(proxied):');
+
+    obj2.b = 1;
+    ++obj2.b;
+    console.log('b' in obj2);
+
+    console.log('obj1 与 obj2 的操作都会影响到 obj1:', obj1);
+
+    // 下面的代码会让浏览器崩溃:
+
+    // const obj3 = Object.create(obj2);
+    //
+    // console.log('Object created from proxy:');
+    //
+    // obj3.c = 1;
+    // ++obj3.c;
+
+    const obj3 = new Proxy(obj1, {
+        deleteProperty(target, key) {
+            console.log(`delete ${key}!`);
+            return Reflect.deleteProperty(target, key);
+        },
+        ownKeys(target) {
+            console.log(`ownKey!`);
+            return Reflect.ownKeys(target);
+        },
+    });
+
+    delete obj3.c;
+    console.log('Object.keys:', Object.keys(obj3));
+    console.log('Object.getOwnPropertyNames:', Object.getOwnPropertyNames(obj3));
+    console.log('Object.getOwnPropertySymbols:', Object.getOwnPropertySymbols(obj3));
+    for (const k in obj3) {}
+    console.log('for ... in:');
+
+    const obj4 = new Proxy(obj1, {
+        getOwnPropertyDescriptor(target, key) {
+            console.log(`getOwnPropertyDescriptor ${key}!`);
+            return Reflect.getOwnPropertyDescriptor(target, key);
+        },
+    });
+</script>

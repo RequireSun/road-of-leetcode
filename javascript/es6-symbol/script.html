@@ -96,4 +96,57 @@
 
     console.log('isConcatSpreadable class set(true) instance:', [1, 2, 3].concat(new Class3()));
     console.log('isConcatSpreadable class set(true) prototype:', [1, 2, 3].concat(new Class4()));
+
+    // Symbol.species Symbol.match Symbol.replace Symbol.search Symbol.split 都很无聊, 就不写了
+
+    const obj4 = {
+        [Symbol.toPrimitive](hint) {
+            switch (hint) {
+                case 'number':
+                    return 123;
+                case 'string':
+                    return 'str';
+                case 'default':
+                    return 'default';
+                default:
+                    throw new Error();
+            }
+        }
+    };
+
+    console.log(2 * obj4);           // 246
+    console.log(3 + obj4);           // '3default'
+    console.log(obj4 == 'default');  // true
+    console.log(obj4 === 'default'); // false
+    console.log(String(obj4));       // 'str'
+
+    const obj5 = {
+        [Symbol.toStringTag]: 'Foo',
+    };
+
+    console.log(Object.prototype.toString.call(obj5));
+
+    const foo = () => 0;
+
+    class Class5 {
+        foo() {
+            return 1;
+        }
+    }
+
+    with (new Class5()) {
+        console.log(foo());
+    }
+
+    class Class6 {
+        // with 的时忽略
+        [Symbol.unscopables] = { foo: true };
+        foo() {
+            return 2;
+        }
+    }
+
+    with (new Class6()) {
+        console.log(foo());
+    }
 </script>

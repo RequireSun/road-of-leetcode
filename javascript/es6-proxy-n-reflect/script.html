@@ -138,4 +138,30 @@
 
     console.log('apply:', obj7(1, 2, 3, 4, 5));
     console.log('new:', new obj7(1, 2, 3, 4, 5));
+
+    const { proxy: obj8, revoke } = Proxy.revocable(obj1, {});
+
+    console.log('before revoke:', obj8.a);
+    revoke();
+    try {
+        console.log('after revoke:', obj8.a);
+    } catch(ex) {
+        console.error(ex);
+    }
+
+    // this 值变化问题
+    // 必须通过绑定 this 来做
+    const obj9 = new Proxy(new Date('2015-01-01'), {
+        get(target, prop) {
+            const fn = Reflect.get(target, prop);
+
+            if ('function' === typeof fn) {
+                return fn.bind(target);
+            } else {
+                return fn;
+            }
+        },
+    });
+
+    console.log(obj9.getDate()); // 1
 </script>

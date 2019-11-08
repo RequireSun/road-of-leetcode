@@ -1,0 +1,72 @@
+.App {
+  text-align: center;
+
+  &-logo {
+    height: 5vmin;
+  }
+
+  &-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: #282c34;
+    padding: 10px;
+    min-height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: calc(6px + 1vmin);
+    color: white;
+
+    &-icon {
+      display: flex;
+      flex-direction: row;
+    }
+
+    &-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      p {
+        margin: 5px 0;
+      }
+    }
+
+    &-nav {
+      list-style: none;
+
+      li {
+        display: inline-block;
+        margin-left: 10px;
+
+        &+li:before {
+          content: "";
+          display: inline-block;
+          width: 5px;
+          height: 5px;
+          margin-right: 10px;
+          margin-bottom: 4px;
+          background-color: white;
+        }
+
+        a {
+          color: white;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  &-link {
+    color: #09d3ac;
+  }
+
+  &-body {
+    min-height: 100vh;
+    padding-top: 80px;
+    background-color: #09d3ac;
+  }
+}

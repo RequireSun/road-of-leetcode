@@ -1,5 +1,15 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## 相关文档
+
+create react app 官方文档:
+
+[https://create-react-app.dev/](https://create-react-app.dev/)
+
+在 creat react app 项目中启用 less:
+
+[https://juejin.im/post/5c3d67066fb9a049f06a8323](https://juejin.im/post/5c3d67066fb9a049f06a8323)
+
 ## Available Scripts
 
 In the project directory, you can run:

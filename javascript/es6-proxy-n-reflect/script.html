@@ -1,0 +1,167 @@
+<script code-main>
+    const obj1 = {};
+
+    const obj2 = new Proxy(obj1, {
+        get: function (target, key, receiver) {
+            console.log(`getting ${key}!`, receiver);
+            return Reflect.get(target, key, receiver);
+        },
+        set: function (target, key, value, receiver) {
+            console.log(`setting ${key}!`, receiver);
+            return Reflect.set(target, key, value, receiver);
+        },
+        has: function (target, key) {
+            console.log(`has ${key}!`);
+            return Reflect.has(target, key);
+        },
+    });
+
+    console.log('obj1(no effect):');
+
+    obj1.a = 1;
+    ++obj1.a;
+    console.log('a' in obj1);
+
+    console.log('obj2(proxied):');
+
+    obj2.b = 1;
+    ++obj2.b;
+    console.log('b' in obj2);
+
+    console.log('obj1 与 obj2 的操作都会影响到 obj1:', obj1);
+
+    // 下面的代码会让浏览器崩溃:
+
+    // const obj3 = Object.create(obj2);
+    //
+    // console.log('Object created from proxy:');
+    //
+    // obj3.c = 1;
+    // ++obj3.c;
+
+    const obj3 = new Proxy(obj1, {
+        deleteProperty(target, key) {
+            console.log(`delete ${key}!`);
+            return Reflect.deleteProperty(target, key);
+        },
+        ownKeys(target) {
+            console.log(`ownKey!`);
+            return Reflect.ownKeys(target);
+        },
+    });
+
+    delete obj3.c;
+    console.log('Object.keys:', Object.keys(obj3));
+    console.log('Object.getOwnPropertyNames:', Object.getOwnPropertyNames(obj3));
+    console.log('Object.getOwnPropertySymbols:', Object.getOwnPropertySymbols(obj3));
+    for (const k in obj3) {}
+    console.log('for ... in:');
+
+    const obj4 = new Proxy(obj1, {
+        getOwnPropertyDescriptor(target, key) {
+            console.log(`getOwnPropertyDescriptor ${key}!`);
+            return Reflect.getOwnPropertyDescriptor(target, key);
+        },
+        // getOwnPropertyDescriptors(target) {
+        //     console.log(`getOwnPropertyDescriptors!`);
+        //     return Reflect.getOwnPropertyDescriptors(target);
+        // },
+        defineProperty(target, key, attributes) {
+            console.log(`defineProperty ${key}!`);
+            return Reflect.defineProperty(target, key, attributes);
+        },
+    });
+
+    console.log('Object.getOwnPropertyDescriptor:', Object.getOwnPropertyDescriptor(obj4, 'b'));
+    console.log('Object.getOwnPropertyDescriptors:', Object.getOwnPropertyDescriptors(obj4));
+    console.log('Object.defineProperty:', Object.defineProperty(obj4, 'd', {
+        get() {
+            return 4;
+        },
+        set() {
+            console.log('wow');
+        },
+    }));
+    console.log('Object.defineProperties:', Object.defineProperties(obj4, {
+        e: {
+            value: 5,
+        },
+        f: {
+            value: 6,
+        },
+    }));
+
+    const obj5 = new Proxy(obj1, {
+        preventExtensions(target) {
+            console.log('Object.preventExtensions!');
+            return Reflect.preventExtensions(target);
+        },
+        isExtensible(target) {
+            console.log('Object.isExtensible!');
+            return Reflect.isExtensible(target);
+        },
+    });
+
+    console.log('Object.preventExtensions:', Object.preventExtensions(obj5));
+    console.log('Object.isExtensible:', Object.isExtensible(obj5));
+
+    const obj6 = new Proxy(obj1, {
+        setPrototypeOf(target, proto) {
+            console.log('Object.setPrototypeOf!');
+            return Reflect.setPrototypeOf(target, proto);
+        },
+        getPrototypeOf(target) {
+            console.log('Object.getPrototypeOf!');
+            return Reflect.getPrototypeOf(target);
+        },
+    });
+
+    console.log('Object.getPrototypeOf:', Object.getPrototypeOf(obj6));
+    // 好像就是用来阻止继承的...
+    // console.log('Object.setPrototypeOf:', Object.setPrototypeOf(obj6, null));
+
+    // 这里不能用对象 / 箭头函数
+    const obj7 = new Proxy(function () {}, {
+        apply(target, thisArg, argArray) {
+            console.log('apply!');
+            return console.log(target, thisArg, argArray);
+        },
+        construct(target, argArray, newTarget) {
+            console.log('new!');
+            return {
+                target,
+                argArray,
+                newTarget,
+            };
+        }
+    });
+
+    console.log('apply:', obj7(1, 2, 3, 4, 5));
+    console.log('new:', new obj7(1, 2, 3, 4, 5));
+
+    const { proxy: obj8, revoke } = Proxy.revocable(obj1, {});
+
+    console.log('before revoke:', obj8.a);
+    revoke();
+    try {
+        console.log('after revoke:', obj8.a);
+    } catch(ex) {
+        console.error(ex);
+    }
+
+    // this 值变化问题
+    // 必须通过绑定 this 来做
+    const obj9 = new Proxy(new Date('2015-01-01'), {
+        get(target, prop) {
+            const fn = Reflect.get(target, prop);
+
+            if ('function' === typeof fn) {
+                return fn.bind(target);
+            } else {
+                return fn;
+            }
+        },
+    });
+
+    console.log(obj9.getDate()); // 1
+</script>

@@ -233,6 +233,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [遍历器 & 生成器](./javascript/es6-iterator-n-yield)
 
++ [Proxy & Reflect](./javascript/es6-proxy-n-reflect)
+
 ## 其他内容
 
 [一些小技巧](./TIPS)

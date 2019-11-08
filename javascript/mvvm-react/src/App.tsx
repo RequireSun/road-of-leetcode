@@ -8,6 +8,7 @@ import {
 import logo from './images/logo.svg';
 import './styles/App.less';
 import Context from './pages/Context';
+import RenderProps from './pages/RenderProps';
 
 const App: React.FC = () => {
   return (
@@ -33,6 +34,9 @@ const App: React.FC = () => {
             <li>
               <Link to="/Context">Context</Link>
             </li>
+            <li>
+              <Link to="/RenderProps">RenderProps</Link>
+            </li>
           </ul>
         </header>
         <div className="App-body">
@@ -41,7 +45,10 @@ const App: React.FC = () => {
               <h1>Hello!</h1>
             </Route>
             <Route path="/Context">
-              <Context></Context>
+              <Context />
+            </Route>
+            <Route path="/RenderProps">
+              <RenderProps />
             </Route>
           </Switch>
         </div>

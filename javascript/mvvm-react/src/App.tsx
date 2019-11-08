@@ -9,6 +9,7 @@ import logo from './images/logo.svg';
 import './styles/App.less';
 import Context from './pages/Context';
 import RenderProps from './pages/RenderProps';
+import HighOrderComponent from './pages/HighOrderComponent.jsx';
 
 const App: React.FC = () => {
   return (
@@ -37,6 +38,9 @@ const App: React.FC = () => {
             <li>
               <Link to="/RenderProps">RenderProps</Link>
             </li>
+            <li>
+              <Link to="/HighOrderComponent">HOC</Link>
+            </li>
           </ul>
         </header>
         <div className="App-body">
@@ -49,6 +53,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/RenderProps">
               <RenderProps />
+            </Route>
+            <Route path="/HighOrderComponent">
+              <HighOrderComponent />
             </Route>
           </Switch>
         </div>

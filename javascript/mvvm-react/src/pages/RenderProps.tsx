@@ -34,9 +34,32 @@ const Container = () => (
     </div>
 );
 
+const COuter = (props: {
+    children: (count: number, setCount: (arg: number) => void) => ReactElement,
+}) => {
+    const [count, setCount] = useState(0);
+
+    return (
+        <div>
+            <h3>Outer</h3>
+            {props.children(count, setCount)}
+        </div>
+    );
+};
+
+const CContainer = () => (
+    <div>
+        <COuter>
+            {(count: number, setCount: (arg: number) => void) => (
+                <Inner count={count} setCount={setCount} index={3} />
+            )}
+        </COuter>
+    </div>
+);
 
 export default () => (
     <div>
         <Container />
+        <CContainer />
     </div>
 );

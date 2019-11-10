@@ -19,7 +19,9 @@ exports.init = () => {
 
     http.createServer((req, res) => {
         if ('GET' === req.method) {
-            if (image) {
+            if (/error/.test(req.url)) {
+                throw new Error('new Error');
+            } else if (image) {
                 res.writeHead(200, {
                     'content-type': mime,
                     'response-by': id,

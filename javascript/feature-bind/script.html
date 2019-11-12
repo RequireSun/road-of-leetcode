@@ -1,1 +1,60 @@
-<script code-main></script>
+<meta charset="utf8">
+<script code-main>
+    Function.prototype._bind = function(oThis, ...args) {
+        // 省略类型判断
+
+        // 缓存下当前函数是啥
+        const curFn = this;
+
+        const nop = function () {};
+        // 实际执行的函数
+        const fn = function (...iArgs) {
+            // 调用原函数, this 是否改变取决于是否在使用 new 调用
+            // 如果是 new 那还是要继续在新生成的对象上执行函数的
+            // 否则就在被绑定对象上执行
+            return curFn.call(this instanceof fn ? this : oThis, ...args, ...iArgs);
+        };
+        // 如果当前函数是一个构造函数
+        if (this.prototype) {
+            // 拷贝原型链, 并进行 new 操作
+            nop.prototype = this.prototype;
+        }
+        fn.prototype = new nop();
+
+        return fn;
+    };
+
+    window.a = 1;
+
+    // 默认绑定就是从全局上取
+    // 在没有绑定 this 的情况下触发
+    console.log('默认绑定', function () { return this.a; }());
+
+    const obj = {
+        a: 2,
+        fn() {
+            return this.a;
+        },
+    };
+
+    // 隐式绑定就是从调用函数的对象上取
+    // 在从对象上调用方法的情况下触发
+    console.log('隐式绑定', obj.fn());
+
+    const obj2 = {
+        a: 3,
+    };
+
+    // 就是强制声明了用哪个对象来当做 this 执行
+    console.log('显式绑定', obj.fn._bind(obj2)());
+
+    function Construct(val) {
+        this.a = val;
+    }
+
+    // 就是在 new 的时候绑定
+    // 这里的优先级最高, 因为这里需要真的输出一个原 Construct 类型的对象
+    // 只是说构造的时候固定了几个参数
+    // 要不然就会变成每次 new 都是在原来绑定的那个对象上改属性了
+    console.log('new 绑定', (new (Construct._bind(null, 4))).a);
+</script>

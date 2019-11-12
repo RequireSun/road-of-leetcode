@@ -26,5 +26,11 @@ module.exports = appInfo => {
   return {
     ...config,
     ...userConfig,
+    ['header-injector']: {
+      c: 1,
+    },
+    ['addHeader']: {
+      c: 2,
+    }
   };
 };

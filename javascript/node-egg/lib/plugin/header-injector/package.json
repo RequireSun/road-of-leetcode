@@ -1,0 +1,9 @@
+{
+  "name": "header-injector",
+  "eggPlugin": {
+    "name": "header-injector",
+    "dependencies": [],
+    "optionalDependencies": [],
+    "env": [ "local", "test", "unittest", "prod" ]
+  }
+}

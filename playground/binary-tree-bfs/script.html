@@ -1,0 +1,70 @@
+<script code-main>
+function bfs(root) {
+    if (!root) {
+        return [];
+    }
+    const result = [root];
+    let cursor = 0;
+
+    while (cursor < result.length) {
+        if (result[cursor].left) {
+            result.push(result[cursor].left);
+        }
+        if (result[cursor].right) {
+            result.push(result[cursor].right);
+        }
+        ++cursor;
+    }
+
+    return result.map(node => node.val);
+}
+
+console.log(bfs({
+    val: 1,
+    left: {
+        val: 2,
+        left: {
+            val: 4,
+            right: {
+                val: 8,
+            },
+        },
+        right: {
+            val: 5,
+            left: {
+                val: 9,
+                left: {
+                    val: 14,
+                },
+            },
+            right: {
+                val: 10,
+            },
+        },
+    },
+    right: {
+        val: 3,
+        left: {
+            val: 6,
+            left: {
+                val: 11,
+            },
+            right: {
+                val: 12,
+            },
+        },
+        right: {
+            val: 7,
+            right: {
+                val: 13,
+                right: {
+                    val: 15,
+                    right: {
+                        val: 16
+                    },
+                },
+            },
+        },
+    },
+}));
+</script>

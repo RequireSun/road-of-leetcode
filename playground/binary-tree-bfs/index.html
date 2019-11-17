@@ -38,57 +38,86 @@
 <body>
     <article class="markdown-body">
         
+        <h1 style="padding:10px;background-color: #0984dc;color:#fff;">See Chrome Devtools!</h1>
+        
 
-        <h1 id="playground">Playground</h1>
-<p>主要是数据结构与算法的内容。</p>
-<h2 id="数据结构">数据结构</h2>
-<ul>
-<li><p><a href="binary-indexed-tree">树状数组(二叉索引树)</a></p>
-</li>
-<li><p><a href="binary-tree-bfs">二叉树 - BFS(广度优先遍历)</a></p>
-</li>
-</ul>
-<h2 id="算法">算法</h2>
-<h3 id="排序算法">排序算法</h3>
-<ul>
-<li><p><a href="bubble-sort">冒泡排序</a></p>
-</li>
-<li><p><a href="selection-sort">选择排序</a></p>
-</li>
-<li><p><a href="insertion-sort">插入排序</a></p>
-</li>
-<li><p><a href="heap-sort">堆排序</a></p>
-</li>
-<li><p><a href="merge-sort">归并排序</a></p>
-</li>
-<li><p><a href="quick-sort">快速排序</a></p>
-</li>
-<li><p><a href="shell-sort">希尔排序</a></p>
-</li>
-<li><p><a href="counting-sort">计数排序</a></p>
-</li>
-<li><p><a href="radix-sort">基数排序</a></p>
-</li>
-</ul>
-<h4 id="排序算法的分类">排序算法的分类</h4>
-<ul>
-<li><p>稳定排序与不稳定排序</p>
-</li>
-<li><p>内部排序与外部排序</p>
-</li>
-<li><p>比较排序与非比较排序</p>
-</li>
-</ul>
-<h3 id="字符串">字符串</h3>
-<ul>
-<li><a href="kmp">KMP 算法</a></li>
-</ul>
+        <h1 id="二叉树---bfs广度优先遍历">二叉树 - BFS(广度优先遍历)</h1>
 
     </article>
 
     <div class="code-area"></div>
 </body>
 
+<script code-main>
+function bfs(root) {
+    if (!root) {
+        return [];
+    }
+    const result = [root];
+    let cursor = 0;
+
+    while (cursor < result.length) {
+        if (result[cursor].left) {
+            result.push(result[cursor].left);
+        }
+        if (result[cursor].right) {
+            result.push(result[cursor].right);
+        }
+        ++cursor;
+    }
+
+    return result.map(node => node.val);
+}
+
+console.log(bfs({
+    val: 1,
+    left: {
+        val: 2,
+        left: {
+            val: 4,
+            right: {
+                val: 8,
+            },
+        },
+        right: {
+            val: 5,
+            left: {
+                val: 9,
+                left: {
+                    val: 14,
+                },
+            },
+            right: {
+                val: 10,
+            },
+        },
+    },
+    right: {
+        val: 3,
+        left: {
+            val: 6,
+            left: {
+                val: 11,
+            },
+            right: {
+                val: 12,
+            },
+        },
+        right: {
+            val: 7,
+            right: {
+                val: 13,
+                right: {
+                    val: 15,
+                    right: {
+                        val: 16
+                    },
+                },
+            },
+        },
+    },
+}));
+</script>
 
 
 <script>

@@ -24,6 +24,18 @@
         return fn;
     };
 
+    Function.prototype._softBind = function(oThis, ...args) {
+        const curFn = this;
+
+        const fn = function (...iArgs) {
+            return curFn.call(!this || this === window ? oThis : this, ...args, ...iArgs);
+        };
+
+        fn.prototype = Object.create(curFn.prototype);
+
+        return fn;
+    };
+
     window.a = 1;
 
     // 默认绑定就是从全局上取

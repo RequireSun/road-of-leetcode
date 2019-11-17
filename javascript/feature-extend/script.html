@@ -1,0 +1,81 @@
+<script code-main>
+    // 1. 原型链修改
+    function Base1(a) {
+        this.a = a;
+    }
+
+    Base1.prototype.logA = function () {
+        console.log(this.a);
+    };
+
+    function Extended1(b) {
+        this.b = b;
+    }
+
+    // 构造时传参比较弱智
+    Extended1.prototype = new Base1();
+
+    Extended1.prototype.logB = function () {
+        console.log(this.b);
+    };
+
+    // 2. 构造函数继承
+    function Base2(a) {
+        this.a = a;
+    }
+
+    Base2.prototype.logA = function () {
+        console.log(this.a);
+    };
+
+    // 原型链并未继承
+    function Extended2(a, b) {
+        Base2.call(this, a);
+        this.b = b;
+    }
+
+    Extended2.prototype.logB = function () {
+        console.log(this.b);
+    };
+
+    // 3. 组合式继承 (又有实例属性又有原型链)
+    function Base3(a) {
+        this.a = a;
+    }
+
+    Base3.prototype.logA = function () {
+        console.log(this.a);
+    };
+
+    function Extended3(a, b) {
+        Base3.call(this, a);
+        this.b = b;
+    }
+    // 这个地方多少还是有点丑
+    Extended3.prototype = new Base3();
+
+    Extended3.prototype.logB = function () {
+        console.log(this.b);
+    };
+
+    // 4. 利用 Object.create 实现原型链部分的继承
+    function Base4(a) {
+        this.a = a;
+    }
+
+    Base4.prototype.logA = function () {
+        console.log(this.a);
+    };
+
+    function Extended4(a, b) {
+        Base4.call(this, a);
+        this.b = b;
+    }
+    // 又是链上的, 又不需要经过 Base 的 new 函数
+    Extended4.prototype = Object.create(Base4.prototype);
+
+    Extended4.prototype.logB = function () {
+        console.log(this.b);
+    };
+
+</script>

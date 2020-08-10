@@ -1,3 +1,35 @@
 <meta charset="utf-8" />
 <script code-main>
+const base = {
+    fn1(val) {
+        console.log('base, val', this.val = val);
+    },
+};
+const config1 = {
+    fn1(val, next) {
+        console.log('config1, val + 1', val + 1);
+        next(val + 1);
+        console.log('config1, ++this.val', ++this.val);
+    },
+};
+const config2 = {
+    async fn1(val, next) {
+        console.log('config2, val + 1', val + 1);
+        await next(val + 1);
+        console.log('config2, ++this.val', ++this.val);
+    },
+};
+function onion(obj1, obj2) {
+    for (const [key, val] of Object.entries(obj2)) {
+        if (obj1[key]) {
+            const original = obj1[key];
+            obj1[key] = function (arg) {
+                val(arg, original);
+            };
+        }
+    }
+    return obj1;
+}
+onion(onion(base, config1), config2);
+base.fn1(1);
 </script>

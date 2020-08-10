@@ -1,0 +1,128 @@
+<meta charset="utf-8" />
+<script code-main>
+function thenable(obj) {
+    return obj && typeof(obj) === 'object' && 'then' in obj;
+}
+
+function Prom(fn) {
+    this._state = 'pending';
+    this._thenList = [];
+    this._catchList = [];
+    this._result = null;
+    this._error = null;
+    var self = this;
+    fn(function (result) {
+        self._state = 'resolve';
+        self._result = result;
+        setTimeout(function () {
+            self._thenList.forEach(function (fnThen) {
+                fnThen(result);
+            });
+        }, 0);
+    }, function (error) {
+        self._state = 'reject';
+        self._error = error;
+        setTimeout(function () {
+            self._catchList.forEach(function (fnCatch) {
+                fnCatch(error);
+            });
+        }, 0);
+    });
+}
+
+Prom.prototype.then = function (res, rej) {
+    var self = this;
+    res = typeof(res) === 'function' ? res : function (v) { return v; };
+    rej = typeof(rej) === 'function' ? rej : function (v) { return v; };
+
+    // TODO return 串行
+    switch (this._state) {
+        case 'resolve': {
+            return new Prom(function (resolve, reject) {
+                try {
+                    var ret = res(self._result);
+                    if (thenable(ret)) {
+                        ret.then(resolve, reject);
+                    } else {
+                        resolve(ret);
+                    }
+                } catch (ex) {
+                    reject(ex);
+                }
+            });
+        }
+        case 'reject': {
+            return new Prom(function (resolve, reject) {
+                try {
+                    var ret = rej(this._error);
+                    if (thenable(ret)) {
+                        ret.then(resolve, reject);
+                    } else {
+                        resolve(ret);
+                    }
+                } catch (ex) {
+                    reject(ex);
+                }
+            });
+        }
+        case 'pending': {
+            return new Prom(function (resolve, reject) {
+                self._thenList.push(function (val) {
+                    try {
+                        var ret = res(val);
+                        if (thenable(ret)) {
+                            ret.then(resolve, reject);
+                        } else {
+                            resolve(ret);
+                        }
+                    } catch (ex) {
+                        reject(ex);
+                    }
+                });
+
+                self._catchList.push(function (val) {
+                    try {
+                        var ret = rej(val);
+                        if (thenable(ret)) {
+                            ret.then(resolve, reject);
+                        } else {
+                            resolve(ret);
+                        }
+                    } catch (ex) {
+                        reject(ex);
+                    }
+                });
+            });
+        }
+    }
+};
+Prom.prototype.catch = function (rej) {
+    return this.then(undefined, rej);
+};
+Prom.resolve = function (val) {
+    return new Promise(function (res) { res(val); });
+};
+Prom.reject = function (val) {
+    return new Promise(function (res, rej) { rej(val); });
+};
+
+var testCase1 = function (pClass, name) {
+    var promise = new pClass(function (resolve, reject) {
+        setTimeout(resolve.bind(null, 1), 300);
+    });
+    promise.then((result) => {
+        console.log(name, '(new Promise()).then 1:', result);
+        return 2;
+    }).then((result) => {
+        console.log(name, '(new Promise()).then 2:', result);
+        return 3;
+    }).then((result) => {
+        console.log(name, '(new Promise()).then 3:', result);
+        return 4;
+    });
+};
+
+testCase1(Promise, 'Promise');
+testCase1(Prom, 'Prom');
+
+</script>

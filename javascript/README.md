@@ -16,3 +16,9 @@
 + [遍历器 & 生成器](./es6-iterator-n-yield)
 
 + [Proxy & Reflect](./es6-proxy-n-reflect)
+
+## 白板面试常见题
+
++ [手动实现 - bind](./feature-bind)
+
++ [手动实现 - 柯里化](./feature-curry)

@@ -121,13 +121,15 @@
     // console.log('Object.setPrototypeOf:', Object.setPrototypeOf(obj6, null));
 
     // 这里不能用对象 / 箭头函数
-    const obj7 = new Proxy(function () {}, {
+    const obj7 = new Proxy(function (...args) {
+        return args.reduce((a, b) => a + b, 0);
+    }, {
         apply(target, thisArg, argArray) {
-            console.log('apply!');
-            return console.log(target, thisArg, argArray);
+            console.log('in apply!', target, thisArg, argArray);
+            return Reflect.apply(target, thisArg, argArray);
         },
         construct(target, argArray, newTarget) {
-            console.log('new!');
+            console.log('in new!');
             return {
                 target,
                 argArray,
@@ -163,5 +165,6 @@
         },
     });
 
-    console.log(obj9.getDate()); // 1
+    const obj9GetDate = obj9.getDate;
+    console.log('obj9 getDate auto bind:', obj9GetDate()); // 1
 </script>

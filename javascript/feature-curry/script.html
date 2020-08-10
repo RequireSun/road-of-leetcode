@@ -1,0 +1,50 @@
+<meta charset="utf8">
+<script code-main>
+    function curryRecursion(fn, ...args) {
+        if (fn.length <= args.length) {
+            return fn(...args);
+        } else {
+            return function (...argv) {
+                return curryRecursion(fn, ...args, ...argv);
+            }
+        }
+    }
+
+    function curryCounted(fn, count) {
+        const limit = undefined === count ? fn.length : count;
+        return function recursion(...args) {
+            if (args.length >= limit) {
+                return fn(...args);
+            } else {
+                return function (...argv) {
+                    return recursion(...args, ...argv);
+                }
+            }
+        };
+    }
+
+    function testFn(a, b, c, d) {
+        return a + b + c + d;
+    }
+
+    const recursion = curryRecursion(testFn);
+    console.log('recursion(1)(2)(3)(4)', recursion(1)(2)(3)(4));
+    console.log('recursion(1, 2)(3)(4)', recursion(1, 2)(3)(4));
+    console.log('recursion(1)(2, 3)(4)', recursion(1)(2, 3)(4));
+    console.log('recursion(1)(2)(3, 4)', recursion(1)(2)(3, 4));
+    console.log('recursion(1, 2)(3, 4)', recursion(1, 2)(3, 4));
+    console.log('recursion(1, 2, 3)(4)', recursion(1, 2, 3)(4));
+    console.log('recursion(1)(2, 3, 4)', recursion(1)(2, 3, 4));
+    console.log('recursion(1, 2, 3, 4)', recursion(1, 2, 3, 4));
+
+    const counted = curryCounted(testFn, 4);
+    console.log('counted(1)(2)(3)(4)', counted(1)(2)(3)(4));
+    console.log('counted(1, 2)(3)(4)', counted(1, 2)(3)(4));
+    console.log('counted(1)(2, 3)(4)', counted(1)(2, 3)(4));
+    console.log('counted(1)(2)(3, 4)', counted(1)(2)(3, 4));
+    console.log('counted(1, 2)(3, 4)', counted(1, 2)(3, 4));
+    console.log('counted(1, 2, 3)(4)', counted(1, 2, 3)(4));
+    console.log('counted(1)(2, 3, 4)', counted(1)(2, 3, 4));
+    console.log('counted(1, 2, 3, 4)', counted(1, 2, 3, 4));
+
+</script>

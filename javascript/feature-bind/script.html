@@ -1,20 +1,31 @@
 <meta charset="utf8">
 <script code-main>
-    Function.prototype._bind = function(oThis, ...args) {
-        // 省略类型判断
+    Function.prototype._bind = function() {
+        // 类型判断, 可以不看
+        if (typeof(this) !== 'function') {
+            throw new TypeError('Function.prototype.bind - must be applied to a function!');
+        }
 
-        // 缓存下当前函数是啥
+        // 绑定目标
+        const oThis = arguments[0];
+        // 柯里化参数
+        const args = Array.prototype.slice.call(arguments, 1);
+        // 当前函数
         const curFn = this;
-
-        const nop = function () {};
         // 实际执行的函数
-        const fn = function (...iArgs) {
+        const fn = function () {
+            const argv = [];
+            Array.prototype.push.apply(argv, args);
+            Array.prototype.push.apply(argv, arguments);
             // 调用原函数, this 是否改变取决于是否在使用 new 调用
+            // (this instanceof fn === true 代表了当前正在执行 new 函数 (js 底层已自动生成 this))
             // 如果是 new 那还是要继续在新生成的对象上执行函数的
             // 否则就在被绑定对象上执行
-            return curFn.call(this instanceof fn ? this : oThis, ...args, ...iArgs);
+            return curFn.apply(this instanceof fn ? this : oThis, argv);
         };
-        // 如果当前函数是一个构造函数
+        // 用于生成原型链的空函数
+        const nop = function () {};
+        // 如果当前函数是一个构造函数 (除了 Object.create(null) 生成的以外都应该有原型链)
         if (this.prototype) {
             // 拷贝原型链, 并进行 new 操作
             nop.prototype = this.prototype;

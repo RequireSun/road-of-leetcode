@@ -1,0 +1,14 @@
+<script code-main>
+function longestIncreasingSubsequence(arr) {
+    const matrix = Array(arr.length).fill(1);
+    for (let i = 0; i < arr.length; ++i) {
+        for (let j = 0; j < i; ++j) {
+            if (arr[i] > arr[j]) {
+                matrix[i] = Math.max(matrix[i], matrix[j] + 1);
+            }
+        }
+    }
+    return matrix;
+}
+console.log(longestIncreasingSubsequence([1, 7, 3, 5, 9, 4, 8]));
+</script>

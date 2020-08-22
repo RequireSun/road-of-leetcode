@@ -1,0 +1,28 @@
+<script code-main>
+    function longestCommonSubsequence(arr1, arr2) {
+        const matrix = [];
+        // 初始化矩阵
+        for (let i = 0; i < arr1.length + 1; ++i) {
+            matrix.push(Array(arr2.length + 1));
+            matrix[i][0] = 0;
+        }
+        matrix[0].fill(0);
+
+        for (let i = 0; i < arr1.length; ++i) {
+            for (let j = 0; j < arr2.length; ++j) {
+                if (arr1[i] === arr2[j]) {
+                    matrix[i + 1][j + 1] = matrix[i][j] + 1;
+                } else {
+                    matrix[i + 1][j + 1] = Math.max(matrix[i + 1][j], matrix[i][j + 1]);
+                }
+            }
+        }
+
+        return matrix[arr1.length][arr2.length];
+    }
+
+    const arr1 = ['B', 'D', 'C', 'A', 'B', 'A'];
+    const arr2 = ['A', 'B', 'C', 'B', 'D', 'A', 'B'];
+
+    console.log(longestCommonSubsequence(arr1, arr2));
+</script>

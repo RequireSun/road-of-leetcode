@@ -41,10 +41,30 @@
         <h1 style="padding:10px;background-color: #0984dc;color:#fff;">See Chrome Devtools!</h1>
         
 
-        <h1 id="最长上升子序列">最长上升子序列</h1>
-<p>常见面试题, 在 leetcode 中编号 No.300.</p>
-<p><a href="../../0300.longest-increasing-subsequence">0300.longest-increasing-subsequence</a></p>
-<p>常见解法动态规划, 有复杂度 nlogn 的贪心算法, 没看懂.</p>
+        <h1 id="最长公共子序列">最长公共子序列</h1>
+<p>常见面试题, 在 leetcode 中编号 No.1143.</p>
+<p><a href="../../1143.longest-common-subsequence">1143.longest-common-subsequence</a></p>
+<p>动态规划经典题目, 动态规划思路:</p>
+<ol>
+<li>理清 <code>res[cur] = ? res[cur - n] ?</code> (本题为二维, 自增子串那个题是一维)</li>
+<li>列出表达式</li>
+<li>转成代码</li>
+</ol>
+<p>比如本题的表达式就为:</p>
+<pre><code class="language-javascript">if (i === -1 || j === -1) {
+    // 计算辅助值, 含义为任何一串长度为 0 时
+    // 两串的最长公共子序列长度均为 0
+    res[i][j] = 0;
+} else if (arr1[i] === arr2[j]) {
+    // 当前位相同, 即可将上一位的最大子串长度 +1
+    res[i][j] = res[i - 1][j - 1];
+} else {
+    // 当前位不同, 判断:
+    // arr1[0 ~ i] &amp; arr2[0 ~ j-1]
+    // arr1[0 ~ i-1] &amp; arr2[0 ~ j]
+    // 这两个 case 谁的公共子串更长一点, 并使用该值 
+    res[i][j] = max(res[i][j - 1], res[i - 1][j]);
+}</code></pre>
 
     </article>
 
@@ -52,18 +72,32 @@
 </body>
 
 <script code-main>
-function longestIncreasingSubsequence(arr) {
-    const matrix = Array(arr.length).fill(1);
-    for (let i = 0; i < arr.length; ++i) {
-        for (let j = 0; j < i; ++j) {
-            if (arr[i] > arr[j]) {
-                matrix[i] = Math.max(matrix[i], matrix[j] + 1);
+    function longestCommonSubsequence(arr1, arr2) {
+        const matrix = [];
+        // 初始化矩阵
+        for (let i = 0; i < arr1.length + 1; ++i) {
+            matrix.push(Array(arr2.length + 1));
+            matrix[i][0] = 0;
+        }
+        matrix[0].fill(0);
+
+        for (let i = 0; i < arr1.length; ++i) {
+            for (let j = 0; j < arr2.length; ++j) {
+                if (arr1[i] === arr2[j]) {
+                    matrix[i + 1][j + 1] = matrix[i][j] + 1;
+                } else {
+                    matrix[i + 1][j + 1] = Math.max(matrix[i + 1][j], matrix[i][j + 1]);
+                }
             }
         }
+
+        return matrix[arr1.length][arr2.length];
     }
-    return Math.max(...matrix);
-}
-console.log(longestIncreasingSubsequence([1, 7, 3, 5, 9, 4, 8]));
+
+    const arr1 = ['B', 'D', 'C', 'A', 'B', 'A'];
+    const arr2 = ['A', 'B', 'C', 'B', 'D', 'A', 'B'];
+
+    console.log(longestCommonSubsequence(arr1, arr2));
 </script>
 
 

@@ -27,6 +27,10 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0093. 复原IP地址](0093.restore-ip-addresses)
 
++ [0110. 平衡二叉树](0110.balanced-binary-tree)
+
+    __TODO__ 性能尚未达到前 10%
+
 + [0127. 单词接龙](0127.word-ladder)
 
 + [0133. 图克隆](0133.clone-graph)

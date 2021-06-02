@@ -153,6 +153,8 @@ GitHub Page: [https://requiresun.github.io/road-of-leetcode/](https://requiresun
 
 + [0870. 优势洗牌](0870.advantage-shuffle)
 
++ [0901. 股价跨度实时记录](0901.online-stock-span)
+
 + [0939. 面积最小的长方形](0939.minimum-area-rectangle)
 
 + [0946. 校验堆栈顺序](0946.validate-stack-sequences)

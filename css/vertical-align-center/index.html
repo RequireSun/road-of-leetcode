@@ -9,23 +9,104 @@
   <link rel="stylesheet" href="./index.css">
 </head>
 <body>
-<div class="example">
-  <h2 class="use-title">1. transform</h2>
-  <style class="use-style" type="text/css">
-    .use-transform .container {
-      position: relative;
-    }
-    .use-transform .target {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-    }
-  </style>
-  <div class="use-code"></div>
-  <div class="use-case use-transform">
-    <div class="container">
-      <div class="target"></div>
+<h1>Vertical Align Center</h1>
+<div class="example-list">
+  <div class="example">
+    <h2 class="use-title">1. transform</h2>
+    <style class="use-style" type="text/css">
+      .use-transform .container {
+        position: relative;
+      }
+      .use-transform .target {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+    <div class="use-code"></div>
+    <div class="use-case use-transform">
+      <div class="container">
+        <div class="target"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <h2 class="use-title">2. margin: auto</h2>
+    <style class="use-style" type="text/css">
+      .use-margin-auto .container {
+        position: relative;
+      }
+      .use-margin-auto .target {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+    </style>
+    <div class="use-code"></div>
+    <div class="use-case use-margin-auto">
+      <div class="container">
+        <div class="target"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <h2 class="use-title">3. flex</h2>
+    <style class="use-style" type="text/css">
+      .use-flex .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .use-flex .target {}
+    </style>
+    <div class="use-code"></div>
+    <div class="use-case use-flex">
+      <div class="container">
+        <div class="target"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <h2 class="use-title">4. grid</h2>
+    <style class="use-style" type="text/css">
+      .use-grid .container {
+        display: grid;
+        justify-items: center;
+        align-items: center;
+      }
+      .use-grid .target {}
+    </style>
+    <div class="use-code"></div>
+    <div class="use-case use-grid">
+      <div class="container">
+        <div class="target"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <h2 class="use-title">5. line-height + vertical-align</h2>
+    <style class="use-style" type="text/css">
+      .use-grid .container {
+        line-height: 180px;
+        vertical-align: center;
+      }
+      .use-grid .target {
+        display: inline;
+      }
+    </style>
+    <div class="use-code"></div>
+    <div class="use-case use-grid">
+      <div class="container">
+        <div class="target"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -49,7 +130,7 @@
       const pre = document.createElement('pre');
       const code = document.createElement('code');
 
-      code.innerHTML = $css.innerHTML.split('\n').map(line => line.replace(/\s{4}/g, '')).join('\n');
+      code.innerHTML = $css.innerHTML.split('\n').map(line => line.replace(/\s{6}/g, '')).slice(1, -1).join('\n');
       $codes.push(code);
 
       pre.appendChild(code);

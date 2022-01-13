@@ -16,7 +16,6 @@ const PATH_PLAYGROUND_README = path.join(PATH_PLAYGROUND, 'README.md');
 const PATH_TEMPLATE_INDEX = path.join(__dirname, 'template/README2Index.art');
 
 let tIndex;
-
 let _p = Promise.resolve();
 
 _p = _p.then(() => {

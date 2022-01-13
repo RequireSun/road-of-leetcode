@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vertical Align Center</title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+<h1>Vertical Align Center</h1>
+<div class="example-list">
+  <div class="example">
+    <h2 class="use-title">1. transform</h2>
+    <style class="use-style" type="text/css">
+      .use-transform .container {
+        position: relative;
+      }
+      .use-transform .target {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+    <div class="use-code"></div>
+    <div class="use-case use-transform">
+      <div class="container">
+        <div class="target"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <h2 class="use-title">2. margin: auto</h2>
+    <style class="use-style" type="text/css">
+      .use-margin-auto .container {
+        position: relative;
+      }
+      .use-margin-auto .target {
+        position: absolute;
+        margin: auto;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+    </style>
+    <div class="use-code"></div>
+    <div class="use-case use-margin-auto">
+      <div class="container">
+        <div class="target"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <h2 class="use-title">3. flex</h2>
+    <style class="use-style" type="text/css">
+      .use-flex .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .use-flex .target {}
+    </style>
+    <div class="use-code"></div>
+    <div class="use-case use-flex">
+      <div class="container">
+        <div class="target"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <h2 class="use-title">4. grid</h2>
+    <style class="use-style" type="text/css">
+      .use-grid .container {
+        display: grid;
+        justify-items: center;
+        align-items: center;
+      }
+      .use-grid .target {}
+    </style>
+    <div class="use-code"></div>
+    <div class="use-case use-grid">
+      <div class="container">
+        <div class="target"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <h2 class="use-title">5. line-height + vertical-align</h2>
+    <style class="use-style" type="text/css">
+      .use-grid .container {
+        line-height: 180px;
+        vertical-align: center;
+      }
+      .use-grid .target {
+        display: inline;
+      }
+    </style>
+    <div class="use-code"></div>
+    <div class="use-case use-grid">
+      <div class="container">
+        <div class="target"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- START highlight.js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/solarized-light.min.css">
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/languages/css.min.js"></script>
+<!-- END highlight.js -->
+
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const $examples = document.querySelectorAll('.example');
+    const $codes = [];
+
+    for (const $example of $examples) {
+      const $css = $example.querySelector('.use-style');
+      const $code = $example.querySelector('.use-code');
+
+      const fragment = document.createDocumentFragment();
+      const pre = document.createElement('pre');
+      const code = document.createElement('code');
+
+      code.innerHTML = $css.innerHTML.split('\n').map(line => line.replace(/\s{6}/g, '')).slice(1, -1).join('\n');
+      $codes.push(code);
+
+      pre.appendChild(code);
+      fragment.appendChild(pre);
+
+      $code.appendChild(fragment);
+    }
+
+    // macro task 挺好的
+    setTimeout(() => {
+      for (let i = 0, l = $codes.length; i < l; ++i) {
+        hljs.highlightBlock($codes[i]);
+      }
+    }, 0);
+  });
+</script>
+</body>
+</html>

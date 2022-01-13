@@ -1,0 +1,57 @@
+.example-list {
+  display: grid;
+  grid-template-columns: repeat(3, 360px);
+  grid-gap: 10px;
+  align-items: flex-start;
+  justify-items: flex-start;
+}
+
+.use-title {
+  margin-bottom: 5px;
+}
+
+.use-code {
+  width: 300px;
+  margin-bottom: 10px;
+}
+
+.use-code .hljs {
+  min-height: 170px;
+}
+
+.use-case {
+  width: 300px;
+  height: 180px;
+  border: 3px solid #999;
+  position: relative;
+}
+
+.use-case:after {
+  content: "Container";
+  color: #fff;
+  bottom: 0;
+  right: 5px;
+  font-size: 24px;
+  position: absolute;
+}
+
+.use-case .container {
+  width: 100%;
+  height: 100%;
+  background-color: #ccc;
+}
+
+.use-case .target {
+  width: 100px;
+  height: 60px;
+  border: 2px solid dodgerblue;
+  background-color: cornflowerblue;
+  text-align: center;
+  line-height: 60px;
+  font-size: 24px;
+}
+
+.use-case .target:after {
+  content: "Target";
+  color: #fff;
+}

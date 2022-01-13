@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/RequireSun/road-of-leetcode/issues"
   },
-  "homepage": "https://github.com/RequireSun/road-of-leetcode#readme",
+  "homepage": "https://requiresun.github.io/road-of-leetcode",
   "devDependencies": {
     "art-template": "^4.13.2",
     "marked": "^0.7.0"

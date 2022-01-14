@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <!-- START github-markdown-css -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css">
+    <style>
+        .markdown-body, .code-area {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+
+        @media (max-width: 767px) {
+            .markdown-body, .code-area {
+                padding: 15px;
+            }
+        }
+
+        .markdown-body+.code-area {
+            padding-top: 0;
+        }
+    </style>
+    <!-- END github-markdown-css -->
+
+    <!-- START highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/solarized-light.min.css">
+    <script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+    <script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/languages/javascript.min.js"></script>
+    <!-- END highlight.js -->
+
+</head>
+<body>
+    <article class="markdown-body">
+        
+        <h1 style="padding:10px;background-color: #0984dc;color:#fff;">See Chrome Devtools!</h1>
+        
+
+        <h1 id="最长上升子序列">最长上升子序列</h1>
+<p>常见面试题, 在 leetcode 中编号 No.300.</p>
+<p><a href="../../0300.longest-increasing-subsequence">0300.longest-increasing-subsequence</a></p>
+<p>常见解法动态规划, 有复杂度 nlogn 的贪心算法, 没看懂.</p>
+
+    </article>
+
+    <div class="code-area"></div>
+</body>
+
+<script code-main>
+function longestIncreasingSubsequence(arr) {
+    const matrix = Array(arr.length).fill(1);
+    for (let i = 0; i < arr.length; ++i) {
+        for (let j = 0; j < i; ++j) {
+            if (arr[i] > arr[j]) {
+                matrix[i] = Math.max(matrix[i], matrix[j] + 1);
+            }
+        }
+    }
+    return Math.max(...matrix);
+}
+console.log(longestIncreasingSubsequence([1, 7, 3, 5, 9, 4, 8]));
+</script>
+
+
+<script>
+    const $codeArea = document.querySelector('.code-area');
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const scripts = document.querySelectorAll('script[code-main]');
+        const fragment = document.createDocumentFragment();
+        const codes = [];
+
+        for (let i = 0, l = scripts.length; i < l; ++i) {
+            const pre = document.createElement('pre');
+            const code = document.createElement('code');
+
+            code.innerHTML = scripts[i].innerHTML;
+            codes.push(code);
+
+            pre.appendChild(code);
+            fragment.appendChild(pre);
+        }
+
+        if ($codeArea) {
+            $codeArea.innerHTML = '';
+            $codeArea.appendChild(fragment);
+        }
+
+        // macro task 挺好的
+        setTimeout(() => {
+            for (let i = 0, l = codes.length; i < l; ++i) {
+                hljs.highlightBlock(codes[i]);
+            }
+        }, 0);
+    });
+</script>
+</html>

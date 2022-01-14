@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <!-- START github-markdown-css -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css">
+    <style>
+        .markdown-body, .code-area {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+
+        @media (max-width: 767px) {
+            .markdown-body, .code-area {
+                padding: 15px;
+            }
+        }
+
+        .markdown-body+.code-area {
+            padding-top: 0;
+        }
+    </style>
+    <!-- END github-markdown-css -->
+
+    <!-- START highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/solarized-light.min.css">
+    <script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+    <script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/languages/javascript.min.js"></script>
+    <!-- END highlight.js -->
+
+</head>
+<body>
+    <article class="markdown-body">
+        
+        <h1 style="padding:10px;background-color: #0984dc;color:#fff;">See Chrome Devtools!</h1>
+        
+
+        <h1 id="proxy--reflect">Proxy &amp; Reflect</h1>
+<blockquote>
+<p>ruanyf 教程地址: <a href="http://es6.ruanyifeng.com/#docs/proxy">http://es6.ruanyifeng.com/#docs/proxy</a></p>
+<p>ruanyf 教程地址: <a href="http://es6.ruanyifeng.com/#docs/reflect">http://es6.ruanyifeng.com/#docs/reflect</a></p>
+</blockquote>
+
+    </article>
+
+    <div class="code-area"></div>
+</body>
+
+<script code-main>
+    const obj1 = {};
+
+    const obj2 = new Proxy(obj1, {
+        get: function (target, key, receiver) {
+            console.log(`getting ${key}!`, receiver);
+            return Reflect.get(target, key, receiver);
+        },
+        set: function (target, key, value, receiver) {
+            console.log(`setting ${key}!`, receiver);
+            return Reflect.set(target, key, value, receiver);
+        },
+        has: function (target, key) {
+            console.log(`has ${key}!`);
+            return Reflect.has(target, key);
+        },
+    });
+
+    console.log('obj1(no effect):');
+
+    obj1.a = 1;
+    ++obj1.a;
+    console.log('a' in obj1);
+
+    console.log('obj2(proxied):');
+
+    obj2.b = 1;
+    ++obj2.b;
+    console.log('b' in obj2);
+
+    console.log('obj1 与 obj2 的操作都会影响到 obj1:', obj1);
+
+    // 下面的代码会让浏览器崩溃:
+
+    // const obj3 = Object.create(obj2);
+    //
+    // console.log('Object created from proxy:');
+    //
+    // obj3.c = 1;
+    // ++obj3.c;
+
+    const obj3 = new Proxy(obj1, {
+        deleteProperty(target, key) {
+            console.log(`delete ${key}!`);
+            return Reflect.deleteProperty(target, key);
+        },
+        ownKeys(target) {
+            console.log(`ownKey!`);
+            return Reflect.ownKeys(target);
+        },
+    });
+
+    delete obj3.c;
+    console.log('Object.keys:', Object.keys(obj3));
+    console.log('Object.getOwnPropertyNames:', Object.getOwnPropertyNames(obj3));
+    console.log('Object.getOwnPropertySymbols:', Object.getOwnPropertySymbols(obj3));
+    for (const k in obj3) {}
+    console.log('for ... in:');
+
+    const obj4 = new Proxy(obj1, {
+        getOwnPropertyDescriptor(target, key) {
+            console.log(`getOwnPropertyDescriptor ${key}!`);
+            return Reflect.getOwnPropertyDescriptor(target, key);
+        },
+        // getOwnPropertyDescriptors(target) {
+        //     console.log(`getOwnPropertyDescriptors!`);
+        //     return Reflect.getOwnPropertyDescriptors(target);
+        // },
+        defineProperty(target, key, attributes) {
+            console.log(`defineProperty ${key}!`);
+            return Reflect.defineProperty(target, key, attributes);
+        },
+    });
+
+    console.log('Object.getOwnPropertyDescriptor:', Object.getOwnPropertyDescriptor(obj4, 'b'));
+    console.log('Object.getOwnPropertyDescriptors:', Object.getOwnPropertyDescriptors(obj4));
+    console.log('Object.defineProperty:', Object.defineProperty(obj4, 'd', {
+        get() {
+            return 4;
+        },
+        set() {
+            console.log('wow');
+        },
+    }));
+    console.log('Object.defineProperties:', Object.defineProperties(obj4, {
+        e: {
+            value: 5,
+        },
+        f: {
+            value: 6,
+        },
+    }));
+
+    const obj5 = new Proxy(obj1, {
+        preventExtensions(target) {
+            console.log('Object.preventExtensions!');
+            return Reflect.preventExtensions(target);
+        },
+        isExtensible(target) {
+            console.log('Object.isExtensible!');
+            return Reflect.isExtensible(target);
+        },
+    });
+
+    console.log('Object.preventExtensions:', Object.preventExtensions(obj5));
+    console.log('Object.isExtensible:', Object.isExtensible(obj5));
+
+    const obj6 = new Proxy(obj1, {
+        setPrototypeOf(target, proto) {
+            console.log('Object.setPrototypeOf!');
+            return Reflect.setPrototypeOf(target, proto);
+        },
+        getPrototypeOf(target) {
+            console.log('Object.getPrototypeOf!');
+            return Reflect.getPrototypeOf(target);
+        },
+    });
+
+    console.log('Object.getPrototypeOf:', Object.getPrototypeOf(obj6));
+    // 好像就是用来阻止继承的...
+    // console.log('Object.setPrototypeOf:', Object.setPrototypeOf(obj6, null));
+
+    // 这里不能用对象 / 箭头函数
+    const obj7 = new Proxy(function (...args) {
+        return args.reduce((a, b) => a + b, 0);
+    }, {
+        apply(target, thisArg, argArray) {
+            console.log('in apply!', target, thisArg, argArray);
+            return Reflect.apply(target, thisArg, argArray);
+        },
+        construct(target, argArray, newTarget) {
+            console.log('in new!');
+            return {
+                target,
+                argArray,
+                newTarget,
+            };
+        }
+    });
+
+    console.log('apply:', obj7(1, 2, 3, 4, 5));
+    console.log('new:', new obj7(1, 2, 3, 4, 5));
+
+    const { proxy: obj8, revoke } = Proxy.revocable(obj1, {});
+
+    console.log('before revoke:', obj8.a);
+    revoke();
+    try {
+        console.log('after revoke:', obj8.a);
+    } catch(ex) {
+        console.error(ex);
+    }
+
+    // this 值变化问题
+    // 必须通过绑定 this 来做
+    const obj9 = new Proxy(new Date('2015-01-01'), {
+        get(target, prop) {
+            const fn = Reflect.get(target, prop);
+
+            if ('function' === typeof fn) {
+                return fn.bind(target);
+            } else {
+                return fn;
+            }
+        },
+    });
+
+    const obj9GetDate = obj9.getDate;
+    console.log('obj9 getDate auto bind:', obj9GetDate()); // 1
+</script>
+
+
+<script>
+    const $codeArea = document.querySelector('.code-area');
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const scripts = document.querySelectorAll('script[code-main]');
+        const fragment = document.createDocumentFragment();
+        const codes = [];
+
+        for (let i = 0, l = scripts.length; i < l; ++i) {
+            const pre = document.createElement('pre');
+            const code = document.createElement('code');
+
+            code.innerHTML = scripts[i].innerHTML;
+            codes.push(code);
+
+            pre.appendChild(code);
+            fragment.appendChild(pre);
+        }
+
+        if ($codeArea) {
+            $codeArea.innerHTML = '';
+            $codeArea.appendChild(fragment);
+        }
+
+        // macro task 挺好的
+        setTimeout(() => {
+            for (let i = 0, l = codes.length; i < l; ++i) {
+                hljs.highlightBlock(codes[i]);
+            }
+        }, 0);
+    });
+</script>
+</html>

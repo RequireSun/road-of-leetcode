@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <!-- START github-markdown-css -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css">
+    <style>
+        .markdown-body, .code-area {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+
+        @media (max-width: 767px) {
+            .markdown-body, .code-area {
+                padding: 15px;
+            }
+        }
+
+        .markdown-body+.code-area {
+            padding-top: 0;
+        }
+    </style>
+    <!-- END github-markdown-css -->
+
+    <!-- START highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/solarized-light.min.css">
+    <script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+    <script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/languages/javascript.min.js"></script>
+    <!-- END highlight.js -->
+
+</head>
+<body>
+    <article class="markdown-body">
+        
+        <h1 style="padding:10px;background-color: #0984dc;color:#fff;">See Chrome Devtools!</h1>
+        
+
+        <h1 id="解构赋值---对象">解构赋值 - 对象</h1>
+<blockquote>
+<p>ruanyf 教程地址: <a href="http://es6.ruanyifeng.com/#docs/destructuring#%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC">http://es6.ruanyifeng.com/#docs/destructuring#对象的解构赋值</a></p>
+</blockquote>
+
+    </article>
+
+    <div class="code-area"></div>
+</body>
+
+<script code-main>
+    // 多层嵌套解构
+    const { a, e: { d: { b }, c } } = { a: 1, e: { d: { b: 2 }, c: 3 } };
+    // 解构时重命名
+    const { a: d, f: { b: e }, f } = { a: 4, f: { b: 5 } };
+    // 如果不止想取 f 内的数据, 也想取 f, 则需要单独声明一次 f 的取值过程
+    console.log(f);
+    // 给其他变量嵌套赋值 (嵌套赋值时因为语法问题, 需要套括号)
+    const obj = {};
+    const arr = [];
+    ({ f: obj.f, g: arr[0] } = { f: 6, g: 7, });
+    // 解构赋值可以取到继承的属性
+    const parent = { h: 8 };
+    const child = {};
+    Object.setPrototypeOf(child, parent);
+    const { h } = child;
+    // class 写法同样支持
+    class Parent {
+        i = 9;
+    }
+    class Child extends Parent {
+        constructor(props) {
+            super(props);
+        }
+    }
+    const { i } = new Child();
+    // 默认值
+    const { j = 10 } = {};
+    // 对数组也可以使用对象的解构 (数组的本质还是对象)
+    const { 0: k, 1: l } = [11, 12];
+    // 对象更进一步的还能使用计算属性进行解构 (数组的解构做不到)
+    const { [1 - 1]: m } = [13];
+    // 也能做到把属性值拽出来
+    const { length: n } = '12345678911131';
+
+    console.log(a, b, c, d, e, obj, arr, h, i, j, k, l, m, n);
+</script>
+
+
+<script>
+    const $codeArea = document.querySelector('.code-area');
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const scripts = document.querySelectorAll('script[code-main]');
+        const fragment = document.createDocumentFragment();
+        const codes = [];
+
+        for (let i = 0, l = scripts.length; i < l; ++i) {
+            const pre = document.createElement('pre');
+            const code = document.createElement('code');
+
+            code.innerHTML = scripts[i].innerHTML;
+            codes.push(code);
+
+            pre.appendChild(code);
+            fragment.appendChild(pre);
+        }
+
+        if ($codeArea) {
+            $codeArea.innerHTML = '';
+            $codeArea.appendChild(fragment);
+        }
+
+        // macro task 挺好的
+        setTimeout(() => {
+            for (let i = 0, l = codes.length; i < l; ++i) {
+                hljs.highlightBlock(codes[i]);
+            }
+        }, 0);
+    });
+</script>
+</html>

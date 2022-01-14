@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <!-- START github-markdown-css -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css">
+    <style>
+        .markdown-body, .code-area {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+
+        @media (max-width: 767px) {
+            .markdown-body, .code-area {
+                padding: 15px;
+            }
+        }
+
+        .markdown-body+.code-area {
+            padding-top: 0;
+        }
+    </style>
+    <!-- END github-markdown-css -->
+
+    <!-- START highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/solarized-light.min.css">
+    <script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+    <script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/languages/javascript.min.js"></script>
+    <!-- END highlight.js -->
+
+</head>
+<body>
+    <article class="markdown-body">
+        
+        <h1 style="padding:10px;background-color: #0984dc;color:#fff;">See Chrome Devtools!</h1>
+        
+
+        <h1 id="bind">bind</h1>
+<p>javascript 里有四种 this 变量的绑定:</p>
+<ol>
+<li><p>默认绑定</p>
+</li>
+<li><p>隐式绑定</p>
+</li>
+<li><p>显示绑定</p>
+</li>
+<li><p>new 绑定</p>
+</li>
+</ol>
+<p>重点在于区分最后两种绑定的优先级, 为了保证每次 new 出来的对象都要是原对象的实例, 必须要在原 new 的结果上进行数据操作</p>
+<p>所以 bind 之内也不会在 new 的时候劫持 this, 具体判断方法就是看真的执行的时候, this 指向的是不是一个当前被执行函数的实例</p>
+<p>如果是的话, 则证明此时就是在执行 new 操作, 该实例也是由默认的 new 操作而生成的, 此时不应劫持 this 的指向.</p>
+
+    </article>
+
+    <div class="code-area"></div>
+</body>
+
+<meta charset="utf8">
+<script code-main>
+    Function.prototype._bind = function() {
+        // 类型判断, 可以不看
+        if (typeof(this) !== 'function') {
+            throw new TypeError('Function.prototype.bind - must be applied to a function!');
+        }
+
+        // 绑定目标
+        const oThis = arguments[0];
+        // 柯里化参数
+        const args = Array.prototype.slice.call(arguments, 1);
+        // 当前函数
+        const curFn = this;
+        // 实际执行的函数
+        const fn = function () {
+            const argv = [];
+            Array.prototype.push.apply(argv, args);
+            Array.prototype.push.apply(argv, arguments);
+            // 调用原函数, this 是否改变取决于是否在使用 new 调用
+            // (this instanceof fn === true 代表了当前正在执行 new 函数 (js 底层已自动生成 this))
+            // 如果是 new 那还是要继续在新生成的对象上执行函数的
+            // 否则就在被绑定对象上执行
+            return curFn.apply(this instanceof fn ? this : oThis, argv);
+        };
+        // 用于生成原型链的空函数
+        const nop = function () {};
+        // 如果当前函数是一个构造函数 (除了 Object.create(null) 生成的以外都应该有原型链)
+        if (this.prototype) {
+            // 拷贝原型链, 并进行 new 操作
+            nop.prototype = this.prototype;
+        }
+        fn.prototype = new nop();
+
+        return fn;
+    };
+
+    Function.prototype._softBind = function(oThis, ...args) {
+        const curFn = this;
+
+        const fn = function (...iArgs) {
+            return curFn.call(!this || this === window ? oThis : this, ...args, ...iArgs);
+        };
+
+        fn.prototype = Object.create(curFn.prototype);
+
+        return fn;
+    };
+
+    window.a = 1;
+
+    // 默认绑定就是从全局上取
+    // 在没有绑定 this 的情况下触发
+    console.log('默认绑定', function () { return this.a; }());
+
+    const obj = {
+        a: 2,
+        fn() {
+            return this.a;
+        },
+    };
+
+    // 隐式绑定就是从调用函数的对象上取
+    // 在从对象上调用方法的情况下触发
+    console.log('隐式绑定', obj.fn());
+
+    const obj2 = {
+        a: 3,
+    };
+
+    // 就是强制声明了用哪个对象来当做 this 执行
+    console.log('显式绑定', obj.fn._bind(obj2)());
+
+    function Construct(val) {
+        this.a = val;
+    }
+
+    // 就是在 new 的时候绑定
+    // 这里的优先级最高, 因为这里需要真的输出一个原 Construct 类型的对象
+    // 只是说构造的时候固定了几个参数
+    // 要不然就会变成每次 new 都是在原来绑定的那个对象上改属性了
+    console.log('new 绑定', (new (Construct._bind(null, 4))).a);
+</script>
+
+
+<script>
+    const $codeArea = document.querySelector('.code-area');
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const scripts = document.querySelectorAll('script[code-main]');
+        const fragment = document.createDocumentFragment();
+        const codes = [];
+
+        for (let i = 0, l = scripts.length; i < l; ++i) {
+            const pre = document.createElement('pre');
+            const code = document.createElement('code');
+
+            code.innerHTML = scripts[i].innerHTML;
+            codes.push(code);
+
+            pre.appendChild(code);
+            fragment.appendChild(pre);
+        }
+
+        if ($codeArea) {
+            $codeArea.innerHTML = '';
+            $codeArea.appendChild(fragment);
+        }
+
+        // macro task 挺好的
+        setTimeout(() => {
+            for (let i = 0, l = codes.length; i < l; ++i) {
+                hljs.highlightBlock(codes[i]);
+            }
+        }, 0);
+    });
+</script>
+</html>

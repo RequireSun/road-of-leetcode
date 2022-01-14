@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <!-- START github-markdown-css -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css">
+    <style>
+        .markdown-body, .code-area {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+
+        @media (max-width: 767px) {
+            .markdown-body, .code-area {
+                padding: 15px;
+            }
+        }
+
+        .markdown-body+.code-area {
+            padding-top: 0;
+        }
+    </style>
+    <!-- END github-markdown-css -->
+
+    <!-- START highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/solarized-light.min.css">
+    <script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+    <script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/languages/javascript.min.js"></script>
+    <!-- END highlight.js -->
+
+</head>
+<body>
+    <article class="markdown-body">
+        
+        <h1 style="padding:10px;background-color: #0984dc;color:#fff;">See Chrome Devtools!</h1>
+        
+
+        <h1 id="堆排序">堆排序</h1>
+<ul>
+<li><p>稳定性</p>
+<p>  不稳定（树结构形成时的形态可能会让后方元素出现在前面） </p>
+</li>
+<li><p>复杂度</p>
+<ul>
+<li><p>时间复杂度</p>
+<p>  非常稳定，永远 O(n(log n))</p>
+</li>
+<li><p>空间复杂度</p>
+<p>  O(1)</p>
+</li>
+</ul>
+</li>
+<li><p>原理</p>
+<p>  将前 n 个数字搞成一个大（小）堆，然后把最大的数移到最后，继续整理前 n - 1 个数，不断整理。</p>
+<p>  注意：开始的时候要从后往前倒序初始化一次堆才行。</p>
+<p>  <img src="assets/hand-painted.png" alt="手绘"></p>
+</li>
+</ul>
+
+    </article>
+
+    <div class="code-area"></div>
+</body>
+
+
+<script type="text/javascript" src="../../utils/sort.js"></script>
+
+<script code-main>
+    const tidyUp = (array, start, end) => {
+        let bigger = start * 2 + 1;
+
+        if (bigger >= end) {
+            return;
+        }
+
+        if (bigger + 1 < end && array[bigger] < array[bigger + 1]) {
+            ++bigger;
+        }
+
+        // 就算一样也应该要比较, 以防孙子节点一类的节点有问题
+        if (array[bigger] >= array[start]) {
+            swap(array, start, bigger);
+            // 如果做过交换了, 就去子继续整理, 以便把小值移动到最底层
+            tidyUp(array, bigger, end);
+        }
+    };
+
+    const heapSort = (array) => {
+        // 先从后往前整体排序一次 (n / 2 之前的项都是根节点, 从叶子开始排序可以确保总根一定是最大的)
+        // 中间那个点作为下标时根本就取不到东西, 要往前一位
+        // (length / 2) * 2 + 1 > length
+        for (let i = Math.floor(array.length / 2) - 1, l = array.length; i >= 0; --i) {
+            tidyUp(array, i, l);
+        }
+
+        for (let l = array.length - 1; l > 0; --l) {
+            swap(array, 0, l);
+            tidyUp(array, 0, l);
+        }
+    };
+
+    const origin = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+
+    heapSort(origin);
+
+    console.log('sort result:', origin);
+</script>
+
+
+<script>
+    const $codeArea = document.querySelector('.code-area');
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const scripts = document.querySelectorAll('script[code-main]');
+        const fragment = document.createDocumentFragment();
+        const codes = [];
+
+        for (let i = 0, l = scripts.length; i < l; ++i) {
+            const pre = document.createElement('pre');
+            const code = document.createElement('code');
+
+            code.innerHTML = scripts[i].innerHTML;
+            codes.push(code);
+
+            pre.appendChild(code);
+            fragment.appendChild(pre);
+        }
+
+        if ($codeArea) {
+            $codeArea.innerHTML = '';
+            $codeArea.appendChild(fragment);
+        }
+
+        // macro task 挺好的
+        setTimeout(() => {
+            for (let i = 0, l = codes.length; i < l; ++i) {
+                hljs.highlightBlock(codes[i]);
+            }
+        }, 0);
+    });
+</script>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <!-- START github-markdown-css -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/3.0.1/github-markdown.min.css">
+    <style>
+        .markdown-body, .code-area {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+
+        @media (max-width: 767px) {
+            .markdown-body, .code-area {
+                padding: 15px;
+            }
+        }
+
+        .markdown-body+.code-area {
+            padding-top: 0;
+        }
+    </style>
+    <!-- END github-markdown-css -->
+
+    <!-- START highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/solarized-light.min.css">
+    <script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+    <script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/languages/javascript.min.js"></script>
+    <!-- END highlight.js -->
+
+</head>
+<body>
+    <article class="markdown-body">
+        
+        <h1 style="padding:10px;background-color: #0984dc;color:#fff;">See Chrome Devtools!</h1>
+        
+
+        <h1 id="二叉索引树-or-树状数组">二叉索引树 or 树状数组</h1>
+<p>Wiki：<a href="https://zh.wikipedia.org/wiki/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84">https://zh.wikipedia.org/wiki/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84</a></p>
+<p>CSDN：<a href="https://blog.csdn.net/Yaokai_AssultMaster/article/details/79492190">https://blog.csdn.net/Yaokai_AssultMaster/article/details/79492190</a></p>
+
+    </article>
+
+    <div class="code-area"></div>
+</body>
+
+
+<script code-main>
+    /**
+     * 没有做越位校验, 不要瞎传数字进去, 崩了概不负责
+     */
+    class BinaryIndexedTree {
+        _array = [];
+        /**
+         * index 对应的二进制字符串中 1 的数量，加快计算速度
+         * @type {Array}
+         */
+        _count1 = [0];
+
+        _prefix = [0];
+
+        constructor(array) {
+            this._array = [undefined, ...array];
+            this._init(1);
+        }
+
+        push(...args) {
+            const oldLength = this._array.length;
+            this._array.push(...args);
+
+            this._init(oldLength);
+        }
+
+        update(pos, newVal) {
+            // 因为数组下标对齐原因，整体后移一位
+            ++pos;
+            const count1 = this._count1[pos];
+            const diff = newVal - this._array[pos];
+            let isOutScope = false;
+
+            this._array[pos] = newVal;
+
+            for (let i = pos, l = this._prefix.length; i < l; ++i) {
+                if (this._count1[i] < count1) {
+                    // 已经断代
+                    isOutScope = true;
+                    this._prefix[i] += diff;
+                } else if (!isOutScope && this._count1[i] === count1) {
+                    // 同层 +1
+                    this._prefix[i] += diff;
+                }
+            }
+        }
+
+        /**
+         * 闭开区间 [start, end)
+         * @param start
+         * @param end
+         */
+        getScope(start, end) {
+            return this.getSummary(end) - this.getSummary(start);
+        }
+
+        /**
+         * 相对于原数组来说, 应该是开的 (index 那一位不计算)
+         * @param index
+         */
+        getSummary(index) {
+            let sum = 0;
+
+            while (index) {
+                sum += this._prefix[index];
+                index = index - (index & -index);
+            }
+
+            return sum;
+        }
+
+        static countI(str) {
+            let count = 0;
+            for (let i = 0, l = str.length; i < l; ++i) {
+                if ('1' === str[i]) {
+                    ++count;
+                }
+            }
+            return count;
+        }
+
+        _init(start) {
+            for (let i = start, l = this._array.length; i < l; ++i) {
+                this._count1[i] = BinaryIndexedTree.countI(i.toString(2));
+            }
+
+            for (let i = start, l = this._array.length; i < l; ++i) {
+                if (this._count1[i] === this._count1[i - 1]) {
+                    // 如果下一位跟前一位 1 一样, 同级子节点就是累加的
+                    this._prefix[i] = this._prefix[i - 1] + this._array[i];
+                } else if (this._count1[i] > this._count1[i - 1]) {
+                    // 如果下一位 1 多了, 就相当于新开子节点
+                    this._prefix[i] = this._array[i];
+                } else if (this._count1[i] < this._count1[i - 1]) {
+                    // 前一个下标
+                    let indexLast = i - 1;
+                    // 当前 1 的个数
+                    const countThis = this._count1[i];
+                    // 先加上自己
+                    this._prefix[i] = this._array[i];
+
+                    // 只要 1 的数量还大于当前值 (也就是说还在子节点中), 就继续加
+                    while (this._count1[indexLast] >= countThis) {
+                        // 加上对应节点的值
+                        this._prefix[i] += this._prefix[indexLast];
+                        // 去掉最后一个 1
+                        // x & -x 可以求出数字二进制中最后一个 1 的位置
+                        // 详见: ../../TIPS.md
+                        indexLast = indexLast - (indexLast & -indexLast);
+                    }
+                }
+            }
+        }
+    }
+
+    const origin = [1, 7, 3, 0, 5, 8, 3, 2, 6, 2, 1, 1, 4, 5, 1, 2, 3, 4, 5, 6];
+
+    const binaryIndexedTree = new BinaryIndexedTree(origin.slice(0, 14));
+
+    console.log('sum(10):', binaryIndexedTree.getSummary(10));
+
+    console.log('scope[6, 10):', binaryIndexedTree.getScope(6, 10));
+
+    binaryIndexedTree.push(...origin.slice(14));
+
+    console.log('sum(19):', binaryIndexedTree.getSummary(19));
+
+    console.log('loop calc(19):', origin.slice(0, 19).reduce((prev, cur) => prev + cur, 0));
+
+    binaryIndexedTree.update(16, 7);
+
+    console.log('+4 in pos[16] sum(19):', binaryIndexedTree.getSummary(19));
+</script>
+
+
+<script>
+    const $codeArea = document.querySelector('.code-area');
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const scripts = document.querySelectorAll('script[code-main]');
+        const fragment = document.createDocumentFragment();
+        const codes = [];
+
+        for (let i = 0, l = scripts.length; i < l; ++i) {
+            const pre = document.createElement('pre');
+            const code = document.createElement('code');
+
+            code.innerHTML = scripts[i].innerHTML;
+            codes.push(code);
+
+            pre.appendChild(code);
+            fragment.appendChild(pre);
+        }
+
+        if ($codeArea) {
+            $codeArea.innerHTML = '';
+            $codeArea.appendChild(fragment);
+        }
+
+        // macro task 挺好的
+        setTimeout(() => {
+            for (let i = 0, l = codes.length; i < l; ++i) {
+                hljs.highlightBlock(codes[i]);
+            }
+        }, 0);
+    });
+</script>
+</html>

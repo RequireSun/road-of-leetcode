@@ -19,6 +19,7 @@
   "homepage": "https://requiresun.github.io/road-of-leetcode",
   "devDependencies": {
     "art-template": "^4.13.2",
+    "cpy": "^8.1.2",
     "marked": "^0.7.0"
   }
 }

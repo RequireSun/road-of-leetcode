@@ -65,3 +65,4 @@ road-of-leetcode.iml
 .DS_Store
 playground/**/index.html
 javascript/**/index.html
+dist
